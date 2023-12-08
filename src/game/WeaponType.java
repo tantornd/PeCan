@@ -5,8 +5,8 @@ public enum WeaponType {
     SWORD,
     GRIMOIRE;
 
-    @Override
-    public String toString() {
-        return super.toString();
+    @Overridetr
+        public String toString() {
+            return super.toSing();
     }
 }
