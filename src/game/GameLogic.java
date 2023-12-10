@@ -116,6 +116,7 @@ public class GameLogic {
 
         if (characterCards.get(currentPlayer).isEmpty()) {
             if (currentPlayer == 1) win = true;
+            gameEnd = true;
             endGame();
         }
         else{
