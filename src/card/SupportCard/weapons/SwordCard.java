@@ -1,4 +1,23 @@
 package card.SupportCard.weapons;
 
-public class SwordCard {
+import card.SupportCard.TargetSelectable;
+
+public class SwordCard extends WeaponCard implements TargetSelectable {
+    public SwordCard() {
+        super();
+    }
+    @Override
+    public void play() {
+
+    }
+
+    @Override
+    public boolean isPlayable() {
+        return false;
+    }
+
+    @Override
+    public void selectTarget() {
+
+    }
 }

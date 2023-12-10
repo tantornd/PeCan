@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 
@@ -33,9 +34,10 @@ public class MainMenu extends StackPane {
         Image tt = new Image(ClassLoader.getSystemResource("titleText.png").toString());
         this.titleText = new javafx.scene.image.ImageView(tt);
 
+        Font font = Font.loadFont(ClassLoader.getSystemResourceAsStream("fonts/MINECRAFT_FONT.ttf"), 80);
         Text startText = new Text("START");
         startText.setFill(Color.WHITE);
-        //startText.setFont(font);
+        startText.setFont(font);
 
         startBorder.getChildren().add(startText);
         startBorder.getChildren().add(titleText);
@@ -52,6 +54,6 @@ public class MainMenu extends StackPane {
             }
 
         });
-
+        this.getChildren().add(startBorder);
     }
 }
