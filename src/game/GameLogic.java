@@ -3,14 +3,13 @@ package game;
 import card.CharacterCard.BaseCharacterCard;
 import card.CharacterCard.GetType;
 import card.SupportCard.BaseSupportCard;
-import card.SupportCard.BowCard;
-import card.SupportCard.Grimoire;
-import card.SupportCard.SwordCard;
+import card.SupportCard.weapons.BowCard;
+import card.SupportCard.weapons.GrimoireCard;
+import card.SupportCard.weapons.SwordCard;
 import util.Randomizer;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 
 public class GameLogic {
     private final ArrayList<BaseSupportCard> deck;
@@ -54,7 +53,7 @@ public class GameLogic {
         //Waiting for constructors and adding support card
         for (int i = 0; i < 2; i++) {
             deck.add(new BowCard());
-            deck.add(new Grimoire());
+            deck.add(new GrimoireCard());
             deck.add(new SwordCard());
         }
         // Shuffle and hand out 5 cards to each player
