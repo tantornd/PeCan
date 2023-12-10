@@ -2,7 +2,7 @@ package card.CharacterCard;
 
 import game.WeaponType;
 
-public class PriestCard extends BaseCharacterCard{
+public class PriestCard extends BaseCharacterCard {
 
     public PriestCard() {
         super(WeaponType.GRIMOIRE, 1);

@@ -2,7 +2,7 @@ package card.CharacterCard;
 
 import game.WeaponType;
 
-public class PalladinCard extends BaseCharacterCard{
+public class PalladinCard extends BaseCharacterCard {
     public PalladinCard() {
         super(WeaponType.SWORD, 3);
     }
