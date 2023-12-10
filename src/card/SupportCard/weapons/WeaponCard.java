@@ -17,6 +17,7 @@ public abstract class WeaponCard extends BaseSupportCard implements TargetSelect
 
     @Override
     public void selectTarget() {
-
+        //TODO: SELECT TARGETS THAT CAN EQUIP THIS WEAPON (ON CLICK EVENT)
+        //TODO: HANDLE IF TARGET"S WEAPON TYPE DOESN'T MATCH
     }
 }
