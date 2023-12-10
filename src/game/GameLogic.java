@@ -17,10 +17,11 @@ public class GameLogic {
     private final ArrayList<ArrayList<BaseSupportCard>> playerHands;
     private ArrayList<ArrayList<BaseCharacterCard>> characterCards;
     private ArrayList<Integer> dice;
-    private ArrayList<CarryOnDamage> carryOnDamage;
+    private ArrayList<CarryOnDamage> carryOnDamage; //IF NONE, ARRAYLIST HOLDS NULL
+    private ArrayList<Buff> buff;
     private int currentPlayer;
     private static GameLogic instance;
-    private static boolean isGameEnd;
+    private static boolean gameEnd;
     private static boolean win;
     private GameLogic() {
         this.deck = new ArrayList<>();
@@ -28,7 +29,8 @@ public class GameLogic {
         this.characterCards = new ArrayList<>(2);
         this.dice = new ArrayList<>(2);
         this.carryOnDamage = new ArrayList<>(2);
-        isGameEnd = false;
+        this.buff = new ArrayList<>(2);
+        gameEnd = false;
         win = false;
         for (int i = 0; i < 2; i++) {
             ArrayList<BaseSupportCard> hand = new ArrayList<>();
@@ -64,24 +66,44 @@ public class GameLogic {
         newEnemyCharacters(); //Add enemy characters
     }
     public void endGame(){
+
         //TODO: ADD JAVA FX!!!!!
         //TODO: IF WIN GO TO WIN SCENE IF LOSE GO TO LOSE SCENE
+
     }
     public void initRound(){
-        if (isGameEnd){
+        if (gameEnd){
             endGame();
         }
         else {
             draw(0, 1);
             draw(1, 1);
             resetDice();
+            for(int i = 0; i < 2; i++){
+                if (buff.get(i) != null){
+                    for (BaseCharacterCard e: characterCards.get(i)){
+                        e.setBaseAttack(e.getBaseAttack() + buff.get(i).getAmount());
+                    }
+                }
+            }
 
-            //TODO: ADD JAVA FX!!!!!!!!!!!!!!!!!!
+            //TODO: ADD JAVA FX!!!!!!!!!!!!!!!!!! มนจว่าต้องมีไหม
+
+            currentPlayer = (currentPlayer + 1) % 2;
+            nextPlayerTurn();
         }
 
     }
     public void endRound(){
         takeCarryOnDamage();
+        for (Buff e: buff){
+            if (e != null){
+                e.decrementRounds();
+                if (e.getRounds() <= 0){
+                    e = null;
+                }
+            }
+        }
 
          //TODO: ADD JAVA FX!!!!!!!!!!!!!!!!!
 
@@ -89,11 +111,40 @@ public class GameLogic {
     }
     public void nextPlayerTurn(){
         currentPlayer = (currentPlayer + 1) % 2;
+        //TODO TANTORN: ADD BOT COMMAND HERE
 
-        //TODO: ADD JAVA FX??????????????????
-        //TODO TANTORN CHECK IF ALL ALIVE AND GO TO ENDGAME
-        if (!isHandPlayable(0) && !isHandPlayable(1)) endRound();
-        if (!isHandPlayable(currentPlayer)) nextPlayerTurn();//IF CURRENT PLAYER CANNOT PLAY GO TO NEXT PLAYER
+        //TODO: ADD JAVA FX FOR PLAYER
+
+        if (characterCards.get(currentPlayer).isEmpty()) {
+            if (currentPlayer == 1) win = true;
+            endGame();
+        }
+        else{
+            if (!canAttack(0) && !canAttack(1)) {
+                if (!isHandPlayable(0) && !isHandPlayable(1)) endRound();
+                else if (!isHandPlayable(currentPlayer)) nextPlayerTurn();
+                //IF CURRENT PLAYER CANNOT PLAY CARD IN HAND GO TO NEXT PLAYER
+                //IF HAND IS PLAYABLE DO NOTHING
+            }
+            else if (!canAttack(currentPlayer)) nextPlayerTurn();
+        }
+
+    }
+    public ArrayList<BaseCharacterCard> getOpponentChar(){
+        return characterCards.get((currentPlayer + 1) % 2);
+    }
+    public boolean canAttack(int idx){
+        ArrayList<BaseCharacterCard> player = characterCards.get(idx);
+        boolean not_found = true;
+        int i = 0;
+        while (not_found && i < player.size()){
+            BaseCharacterCard temp = player.get(i);
+            i += 1;
+            if (temp.canAttack()){
+                not_found = false;
+            }
+        }
+        return !not_found;
     }
     public boolean isHandPlayable(int idx){
         ArrayList<BaseSupportCard> player = playerHands.get(idx);
@@ -128,8 +179,8 @@ public class GameLogic {
         return out;
     }
     public void resetDice(){
-        dice.set(0, 8);
-        dice.set(1, 8);
+        dice.set(0, 10);
+        dice.set(1, 10);
     }
     public BaseCharacterCard getActiveChara(ArrayList<BaseCharacterCard> characterCards){
         for (BaseCharacterCard e: characterCards){
@@ -139,17 +190,76 @@ public class GameLogic {
     }
     public void takeCarryOnDamage(){
         for (int i = 0; i < 2; i++){
-            if (carryOnDamage.get(i) == null || carryOnDamage.get(i).getRounds() == 0) continue;
+            if (carryOnDamage.get(i) == null) continue;
             if (carryOnDamage.get(i).getAttackAll()){
                 for (BaseCharacterCard b: characterCards.get(i)){
-                    b.takeDamage(carryOnDamage.get(i).getDamage());
+                    b.setHp(b.getHp() - carryOnDamage.get(i).getDamage());
+                    if (!b.isAlive()){
+                        characterCards.get(i).remove(b);
+                    }
                 }
                 carryOnDamage.get(i).decrementRounds();
                 //may have an error if no carry on dmg in arraylist
             }
             else{
-                getActiveChara(characterCards.get(i)).takeDamage(carryOnDamage.get(i).getDamage());
+                getActiveChara(characterCards.get(i)).setHp(getActiveChara(characterCards.get(i)).getHp()
+                        - carryOnDamage.get(i).getDamage());
+                if (!getActiveChara(characterCards.get(i)).isAlive()){
+                    characterCards.remove(getActiveChara(characterCards.get(i)));
+                }
+                carryOnDamage.get(i).decrementRounds();
+            }
+            if (carryOnDamage.get(i).getRounds() == 0){
+                carryOnDamage.set(i, null);
             }
         }
+    }
+
+    public ArrayList<ArrayList<BaseCharacterCard>> getCharacterCards() {
+        return characterCards;
+    }
+
+    public ArrayList<ArrayList<BaseSupportCard>> getPlayerHands() {
+        return playerHands;
+    }
+
+    public ArrayList<BaseSupportCard> getDeck() {
+        return deck;
+    }
+
+    public ArrayList<CarryOnDamage> getCarryOnDamage() {
+        return carryOnDamage;
+    }
+
+    public ArrayList<Integer> getDice() {
+        return dice;
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCarryOnDamage(ArrayList<CarryOnDamage> carryOnDamage) {
+        this.carryOnDamage = carryOnDamage;
+    }
+
+    public void setCharacterCards(ArrayList<ArrayList<BaseCharacterCard>> characterCards) {
+        this.characterCards = characterCards;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public void setDice(int idx, int amount) {
+        this.dice.set(idx, amount);
+    }
+
+    public static void setGameEnd(boolean isGameEnd) {
+        GameLogic.gameEnd = isGameEnd;
+    }
+
+    public ArrayList<Buff> getBuff() {
+        return buff;
     }
 }

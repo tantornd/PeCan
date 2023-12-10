@@ -8,7 +8,6 @@ public class GetType { //Used in GameLogic
         out.add(new AssassinCard());
         out.add(new FlameArcherCard());
         out.add(new KnightCard());
-        out.add(new PalladinCard());
         out.add(new MageCard());
         return out;
     }
@@ -16,6 +15,7 @@ public class GetType { //Used in GameLogic
         ArrayList<BaseCharacterCard> out = new ArrayList<>();
         out.add(new BardCard());
         out.add(new PriestCard());
+        out.add(new PalladinCard());
         return out;
     }
 }

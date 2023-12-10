@@ -1,5 +1,6 @@
 package card.CharacterCard;
 
+import game.GameLogic;
 import game.WeaponType;
 
 public class KnightCard extends BaseCharacterCard {
@@ -8,22 +9,24 @@ public class KnightCard extends BaseCharacterCard {
     }
 
     @Override
-    public void attack() {
-
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-
-    }
-
-    @Override
     public void useSkill() {
-
+        if (canUseSkill()) {
+            GameLogic game = GameLogic.getInstance();
+            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            setEnergy(getEnergy() + 1);
+            game.getActiveChara(game.getOpponentChar()).takeDamage(baseAttack+1);
+            game.nextPlayerTurn();
+        }
     }
 
     @Override
     public void useUltimate() {
-
+        if (canUseUltimate()) {
+            GameLogic game = GameLogic.getInstance();
+            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            setEnergy(0);
+            game.getActiveChara(game.getOpponentChar()).takeDamage(baseAttack + 4);
+            game.nextPlayerTurn();
+        }
     }
 }

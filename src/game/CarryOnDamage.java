@@ -4,7 +4,7 @@ import card.CharacterCard.BaseCharacterCard;
 
 import java.util.ArrayList;
 
-public class CarryOnDamage {
+public class CarryOnDamage { //DAMAGE FROM FLAME ARCHER
     private int rounds;
     private int damage;
     private boolean attackAll;

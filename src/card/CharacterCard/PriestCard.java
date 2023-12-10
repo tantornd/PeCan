@@ -1,5 +1,6 @@
 package card.CharacterCard;
 
+import game.GameLogic;
 import game.WeaponType;
 
 public class PriestCard extends BaseCharacterCard {
@@ -9,22 +10,32 @@ public class PriestCard extends BaseCharacterCard {
     }
 
     @Override
-    public void attack() {
-
-    }
-
-    @Override
-    public void takeDamage(int damage) {
-
-    }
-
-    @Override
     public void useSkill() {
-
+        if (canUseSkill()) {
+            GameLogic game = GameLogic.getInstance();
+            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            setEnergy(getEnergy() + 1);
+            BaseCharacterCard temp = game.getCharacterCards().get(game.getCurrentPlayer()).get(0);
+            for (BaseCharacterCard e: game.getCharacterCards().get(game.getCurrentPlayer())){
+                if (e.getHp() < temp.getHp()){
+                    temp = e;
+                }
+            }
+            temp.setHp(getHp() + 2);
+            game.nextPlayerTurn();
+        }
     }
 
     @Override
     public void useUltimate() {
-
+        if (canUseUltimate()){
+            GameLogic game = GameLogic.getInstance();
+            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            setEnergy(0);
+            for (BaseCharacterCard e: game.getCharacterCards().get(game.getCurrentPlayer())){
+                e.setHp(e.getHp() + 3);
+            }
+            game.nextPlayerTurn();
+        }
     }
 }
