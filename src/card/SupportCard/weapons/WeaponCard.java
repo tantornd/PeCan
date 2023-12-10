@@ -2,9 +2,10 @@ package card.SupportCard.weapons;
 
 import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.BaseSupportCard;
+import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 
-public abstract class WeaponCard extends BaseSupportCard {
+public abstract class WeaponCard extends BaseSupportCard implements TargetSelectable {
     public WeaponCard() {
         super(2);
     }
@@ -13,4 +14,9 @@ public abstract class WeaponCard extends BaseSupportCard {
 
     @Override
     public abstract boolean isPlayable();
+
+    @Override
+    public void selectTarget() {
+
+    }
 }

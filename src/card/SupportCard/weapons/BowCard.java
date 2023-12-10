@@ -27,10 +27,4 @@ public class BowCard extends WeaponCard implements TargetSelectable {
         }
         return false;
     }
-
-    @Override
-    public void selectTarget() {
-        //TODO: SELECT TARGETS THAT CAN EQUIP THIS WEAPON (ON CLICK EVENT)
-        //TODO: HANDLE IF TARGET"S WEAPON TYPE DOESN'T MATCH
-    }
 }
