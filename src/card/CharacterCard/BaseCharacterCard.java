@@ -4,27 +4,32 @@ import game.WeaponType;
 
 public abstract class BaseCharacterCard {
     public WeaponType weaponType;
-    public String name;
     public int energy;
     public int shield;
     public int hp;
     public int baseAttack;
+    public boolean active;
 
-    public BaseCharacterCard(String name, WeaponType weaponType, int baseAttack){
-        setName(name);
+    public BaseCharacterCard(WeaponType weaponType, int baseAttack){
         setWeaponType(weaponType);
         setBaseAttack(baseAttack);
         setEnergy(0);
         setShield(0);
         setHp(10);
+        setActive(false);
     }
     public abstract void attack();
-    public abstract void takeDamage();
+    public abstract void takeDamage(int damage);
+    public abstract void useSkill();
+    public abstract void useUltimate();
+    public boolean isAlive(){
+        return hp > 0;
+    }
+    public void setActive(boolean active){
+        this.active = active;
+    }
     public void setWeaponType(WeaponType weaponType){
         this.weaponType = weaponType;
-    }
-    public void setName(String name){
-        this.name = name;
     }
     public void setEnergy(int energy){
         this.energy = energy;
@@ -42,9 +47,6 @@ public abstract class BaseCharacterCard {
     public WeaponType getWeaponType(){
         return weaponType;
     }
-    public String getName(){
-        return name;
-    }
     public int getHp() {
         return hp;
     }
@@ -56,5 +58,8 @@ public abstract class BaseCharacterCard {
     }
     public int getShield(){
         return shield;
+    }
+    public boolean getActive(){
+        return active;
     }
 }
