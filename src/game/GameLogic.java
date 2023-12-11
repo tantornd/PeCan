@@ -38,6 +38,7 @@ public class GameLogic {
     private static GameLogic instance;
     private static boolean gameEnd;
     private static boolean win;
+    private boolean botPlayedEvent;
     private GameLogic() {
         this.deck = new ArrayList<>();
         this.playerHands = new ArrayList<>(2);
@@ -48,6 +49,7 @@ public class GameLogic {
         this.eventCards = new ArrayList<>(2);
         this.eventCards.set(0, new ArrayList<>(4));
         this.eventCards.set(1, new ArrayList<>(4));
+        this.botPlayedEvent = false;
         gameEnd = false;
         win = false;
         for (int i = 0; i < 2; i++) {
@@ -203,19 +205,23 @@ public class GameLogic {
             endGame();
         }
         else{
-            if (canAttack(currentPlayer) || isHandPlayable(currentPlayer)){
-
-                //TODO TANTORN: ADD BOT COMMAND HERE
-
-                //TODO: ADD JAVA FX FOR PLAYER
-
+            if (!canAttack(0) && !canAttack(1)) {
+                if (!isHandPlayable(0) && !isHandPlayable(1)) {
+                    endRound();
+                    return;
+                }
+                else if (!isHandPlayable(currentPlayer)) {
+                    nextPlayerTurn();
+                    return;
+                }
             }
-            else if (!canAttack(0) && !canAttack(1)) {
-                if (!isHandPlayable(0) && !isHandPlayable(1)) endRound();
-                else if (!isHandPlayable(currentPlayer)) nextPlayerTurn();
-                //IF CURRENT PLAYER CANNOT PLAY CARD IN HAND GO TO NEXT PLAYER
+            else if (!canAttack(currentPlayer)) {
+                nextPlayerTurn();
+                return;
             }
-            else if (!canAttack(currentPlayer)) nextPlayerTurn();
+            if (currentPlayer == 1){
+                Bot.performAction();
+            }
         }
 
     }
@@ -226,6 +232,16 @@ public class GameLogic {
         ArrayList<BaseCharacterCard> player = characterCards.get(idx);
         BaseCharacterCard activeChara = getActiveChara(player);
         return activeChara.canAttack();
+    }
+    public boolean canUseSkill(int idx){
+        ArrayList<BaseCharacterCard> player = characterCards.get(idx);
+        BaseCharacterCard activeChara = getActiveChara(player);
+        return activeChara.canUseSkill();
+    }
+    public boolean canUseUltimate(int idx){
+        ArrayList<BaseCharacterCard> player = characterCards.get(idx);
+        BaseCharacterCard activeChara = getActiveChara(player);
+        return activeChara.canUseUltimate();
     }
     public boolean isHandPlayable(int idx){
         ArrayList<BaseSupportCard> player = playerHands.get(idx);
@@ -278,6 +294,9 @@ public class GameLogic {
             if (e.getActive()) return e;
         }
         return null;
+    }
+    public BaseCharacterCard getActiveCharaOpponent(int player){
+        return getActiveChara(characterCards.get((player + 1) % 2));
     }
     public void useDice(int amount){
         setDice(getCurrentPlayer(), getDice().get(currentPlayer) - amount);
@@ -384,6 +403,13 @@ public class GameLogic {
         else{
             this.eventCards.get(currentPlayer).set(idx, eventCard);
         }
+    }
+    public void setBotPlayedEvent(boolean botPlayedEvent) {
+        this.botPlayedEvent = botPlayedEvent;
+    }
+
+    public boolean isBotPlayedEvent() {
+        return botPlayedEvent;
     }
 
 }
