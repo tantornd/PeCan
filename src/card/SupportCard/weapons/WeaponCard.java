@@ -1,12 +1,9 @@
 package card.SupportCard.weapons;
 
-import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.BaseSupportCard;
-import card.SupportCard.TargetSelectable;
-import game.GameLogic;
 import javafx.scene.image.Image;
 
-public abstract class WeaponCard extends BaseSupportCard implements TargetSelectable {
+public abstract class WeaponCard extends BaseSupportCard{
     public WeaponCard() {
         super(2);
     }
@@ -16,13 +13,6 @@ public abstract class WeaponCard extends BaseSupportCard implements TargetSelect
     @Override
     public abstract boolean isPlayable();
 
-    @Override
-    public void selectTarget() {
-
-        //TODO: SELECT TARGETS THAT CAN EQUIP THIS WEAPON (ON CLICK EVENT)
-        //TODO: HANDLE IF TARGET"S WEAPON TYPE DOESN'T MATCH
-
-    }
 
     public abstract Image getImage();
 }
