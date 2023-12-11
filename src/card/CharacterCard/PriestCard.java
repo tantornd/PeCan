@@ -13,7 +13,7 @@ public class PriestCard extends BaseCharacterCard {
     public void useSkill() {
         if (canUseSkill()) {
             GameLogic game = GameLogic.getInstance();
-            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            game.useDice(3);
             setEnergy(getEnergy() + 1);
             BaseCharacterCard temp = game.getCharacterCards().get(game.getCurrentPlayer()).get(0);
             for (BaseCharacterCard e: game.getCharacterCards().get(game.getCurrentPlayer())){
@@ -30,7 +30,7 @@ public class PriestCard extends BaseCharacterCard {
     public void useUltimate() {
         if (canUseUltimate()){
             GameLogic game = GameLogic.getInstance();
-            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            game.useDice(3);
             setEnergy(0);
             for (BaseCharacterCard e: game.getCharacterCards().get(game.getCurrentPlayer())){
                 e.setHp(e.getHp() + 3);

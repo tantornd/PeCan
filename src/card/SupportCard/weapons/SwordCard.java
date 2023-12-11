@@ -5,7 +5,7 @@ import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 import game.WeaponType;
 
-public class SwordCard extends WeaponCard implements TargetSelectable {
+public class SwordCard extends WeaponCard{
     public SwordCard() {
         super();
     }

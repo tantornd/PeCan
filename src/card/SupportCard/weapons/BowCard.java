@@ -6,7 +6,7 @@ import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 import game.WeaponType;
 
-public class BowCard extends WeaponCard implements TargetSelectable {
+public class BowCard extends WeaponCard{
     public BowCard() {
         super();
     }

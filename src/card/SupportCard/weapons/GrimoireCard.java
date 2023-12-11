@@ -5,7 +5,7 @@ import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 import game.WeaponType;
 
-public class GrimoireCard extends WeaponCard implements TargetSelectable {
+public class GrimoireCard extends WeaponCard{
     public GrimoireCard() {super();}
 
     @Override

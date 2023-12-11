@@ -188,6 +188,9 @@ public class GameLogic {
         }
         return null;
     }
+    public void useDice(int amount){
+        setDice(getCurrentPlayer(), getDice().get(currentPlayer) - amount);
+    }
     public void takeCarryOnDamage(){
         for (int i = 0; i < 2; i++){
             if (carryOnDamage.get(i) == null) continue;

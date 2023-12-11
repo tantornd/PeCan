@@ -12,7 +12,7 @@ public class PalladinCard extends BaseCharacterCard {
     public void useSkill() {
         if (canUseSkill()) {
             GameLogic game = GameLogic.getInstance();
-            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            game.useDice(3);
             setEnergy(getEnergy() + 1);
             setShield(3);
             game.nextPlayerTurn();
@@ -23,7 +23,7 @@ public class PalladinCard extends BaseCharacterCard {
     public void useUltimate() {
         if (canUseUltimate()){
             GameLogic game = GameLogic.getInstance();
-            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            game.useDice(3);
             setEnergy(0);
             for (BaseCharacterCard e: game.getCharacterCards().get(game.getCurrentPlayer())){
                 e.setShield(e.getShield() + 3);

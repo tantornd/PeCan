@@ -22,6 +22,7 @@ public abstract class BaseCharacterCard {
 
     public void setActive(boolean active){
         this.active = active;
+        GameLogic.getInstance().useDice(1);
 
         //TODO: ADD JAVAFX!!!!!!!!!!! เวลาเปลี่ยนตัวที่ active ต้องเปลี่ยนช่องสกิลด้วย
 

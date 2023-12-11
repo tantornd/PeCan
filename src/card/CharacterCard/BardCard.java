@@ -13,7 +13,7 @@ public class BardCard extends BaseCharacterCard {
     public void useSkill() {
         if (canUseSkill()){
             GameLogic game = GameLogic.getInstance();
-            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            game.useDice(3);
             setEnergy(getEnergy() + 1);
             game.getBuff().set(game.getCurrentPlayer(), new Buff(2,1));
             game.nextPlayerTurn();
@@ -24,7 +24,7 @@ public class BardCard extends BaseCharacterCard {
     public void useUltimate() {
         if (canUseUltimate()){
             GameLogic game = GameLogic.getInstance();
-            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            game.useDice(3);
             setEnergy(0);
             game.getBuff().set(game.getCurrentPlayer(), new Buff(2,2));
             game.nextPlayerTurn();
