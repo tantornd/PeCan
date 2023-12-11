@@ -10,6 +10,6 @@ public class MieangPlaPao extends HealingFood {
 
     @Override
     public Image getImage() {
-        return new Image(ClassLoader.getSystemResource("MieangPlaPao.png").toString());
+        return new Image(ClassLoader.getSystemResource("MiengPlaPao.png").toString());
     }
 }

@@ -72,7 +72,6 @@ public class GameLogic {
         //TODO: ADD JAVA FX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-
         for (int i = 0; i < 3; i++) {
             deck.add(new BowCard());
             deck.add(new GrimoireCard());

@@ -43,7 +43,7 @@ public class Main extends Application{
     }
     public static void switchToGameBattle() throws InterruptedException {
         GameLogic.getInstance().initGame();
-        ImageView imageView = new ImageView(new Image(ClassLoader.getSystemResource("gameInit.png").toString()));
+        ImageView imageView = new ImageView(new Image(ClassLoader.getSystemResource("GameStart.png").toString()));
         StackPane stp = new StackPane(imageView);
         stage.setScene(new Scene(stp));
         Thread.sleep(500);

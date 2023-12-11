@@ -52,7 +52,7 @@ public class CharSelect extends VBox {
 
         HBox btnBar = new HBox();
         btnBar.setPrefWidth(1440);
-        btnBar.setSpacing(55);
+        btnBar.setSpacing(280);
 
         Button nextBtn = new Button("Next");
         nextBtn.setPrefHeight(100);
