@@ -6,10 +6,11 @@ import game.GameLogic;
 public abstract class EventCard extends BaseSupportCard {
     private int rounds;
 
-    public EventCard(int cost) {
+    public EventCard(int cost, int rounds) {
         super(cost);
+        setRounds(rounds);
     }
-    public abstract void performEffect();
+    public abstract void performEffect(int player);
     public void decrementRounds(){
         if (rounds > 0){
             setRounds(rounds - 1);
@@ -19,6 +20,7 @@ public abstract class EventCard extends BaseSupportCard {
     public void play() {
         GameLogic game = GameLogic.getInstance();
         game.setEventCards(this);
+        game.getPlayerHands().get(game.getCurrentPlayer()).remove(this);
 
         //TODO: ADD JAVA FX FOR SETTING EVENT CARD IN SUPPORT SKILL ZONE
 

@@ -11,6 +11,7 @@ public class SwordCard extends WeaponCard{
     }
     @Override
     public void play() {
+
         //TODO: CHECK IF IS PLAYABLE
         //TODO: SELECT TARGET
         //TODO: INCREASE TARGET'S ATTACK BY 1 USING CHARACTERCARDS.GET(selected character) AND METHODS FROM CHARACTERCARD CLASS

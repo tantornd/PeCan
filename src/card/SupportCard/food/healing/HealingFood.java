@@ -1,6 +1,8 @@
 package card.SupportCard.food.healing;
 
+import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.food.FoodCard;
+import game.GameLogic;
 
 public class HealingFood extends FoodCard {
     private int amount;
@@ -10,12 +12,14 @@ public class HealingFood extends FoodCard {
     }
     @Override
     public void play() {
-        //TODO: SELECT TARGET
-        //TODO: CHECK IF TARGET IS FULL, IF FULL DO NOTHING
-        //TODO: INCREASE TARGET'S HP BY AMOUNT USING CHARACTERCARDS.GET(selected character) AND METHODS FROM CHARACTERCARD CLASS
-        //TODO: SET TARGET FULL TO TRUE
-        //TODO: USEDICE(GETCOST)
-        //NOTE: NO NEED TO NEXT PLAYER TURN, PLAYERS CAN KEEP USING SUPPORT CARDS
+        GameLogic game = GameLogic.getInstance();
+        int curPlayer = game.getCurrentPlayer();
+        BaseCharacterCard temp = game.getCharacterCards().get(curPlayer).get(0);
+        for (BaseCharacterCard e: game.getCharacterCards().get(curPlayer)){
+            if (e.getHp() < temp.getHp()) temp = e;
+        }
+        temp.setHp(temp.getHp() + amount);
+        game.getPlayerHands().get(game.getCurrentPlayer()).remove(this);
     }
 
     public int getAmount() {
