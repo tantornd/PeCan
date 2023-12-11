@@ -47,8 +47,8 @@ public class GameLogic {
         this.carryOnDamage = new ArrayList<>(2);
         this.buff = new ArrayList<>(2);
         this.eventCards = new ArrayList<>(2);
-        this.eventCards.set(0, new ArrayList<>(4));
-        this.eventCards.set(1, new ArrayList<>(4));
+        this.eventCards.add(new ArrayList<>(4));
+        this.eventCards.add(new ArrayList<>(4));
         this.botPlayedEvent = false;
         gameEnd = false;
         win = false;
