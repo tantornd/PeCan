@@ -84,7 +84,7 @@ public class Battle extends BorderPane {
         atkBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
+            // TODO active chara
             }
         });
 
@@ -94,7 +94,7 @@ public class Battle extends BorderPane {
         skillBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
+                // TODO active chara
             }
         });
 
@@ -104,7 +104,7 @@ public class Battle extends BorderPane {
         ultiBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
+                // TODO active chara
             }
         });
 

@@ -68,7 +68,7 @@ public abstract class BaseCharacterCard extends StackPane {
                 if (!active) {
                     Alert a = new Alert(Alert.AlertType.CONFIRMATION, "R U Sure?");
                     a.show();
-                }
+                } // TODO active
             }
         });
     }
