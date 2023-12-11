@@ -4,14 +4,15 @@ import game.GameLogic;
 import game.WeaponType;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -21,7 +22,7 @@ public abstract class BaseCharacterCard extends StackPane {
     public int shield;
     public int hp;
     public int baseAttack;
-    public boolean active;
+    public static boolean active;
     public boolean full;
 
     public BaseCharacterCard(WeaponType weaponType, int baseAttack){
@@ -32,6 +33,10 @@ public abstract class BaseCharacterCard extends StackPane {
         setHp(10);
         setActive(false);
 
+        setPrefHeight(240);
+        setPrefWidth(160);
+        Image bg = getImage();
+        setBackground(new Background(new BackgroundFill(new ImagePattern(bg), CornerRadii.EMPTY, Insets.EMPTY)));
         Circle circle1 = new Circle(50, Color.WHITE);
         Text Hp = new Text();
         Circle circle2 = new Circle(50, Color.WHITE);
@@ -69,21 +74,13 @@ public abstract class BaseCharacterCard extends StackPane {
     }
 
     public void setActive(boolean active){
-        if (GameLogic.getInstance().getDice().get(GameLogic.getInstance().getCurrentPlayer()) > 1) {
-            this.active = active;
-            GameLogic.getInstance().useDice(1);
+        this.active = active;
+        GameLogic.getInstance().useDice(1);
 
-            //TODO: ADD JAVAFX!!!!!!!!!!!
+        //TODO: ADD JAVAFX!!!!!!!!!!! เวลาเปลี่ยนตัวที่ active ต้องเปลี่ยนช่องสกิลด้วย
 
-<<<<<<< HEAD
 
         GameLogic.getInstance().nextPlayerTurn();
-||||||| dd0b7d7
-        GameLogic.getInstance().nextPlayerTurn();
-=======
-            GameLogic.getInstance().nextPlayerTurn();
-        }
->>>>>>> 0b833a77f605c0e2c49fbae86e0e1357b7ed070a
     }
     public void takeDamage(int damage){
         if (shield > 0){
@@ -96,9 +93,6 @@ public abstract class BaseCharacterCard extends StackPane {
         if (!isAlive()){
             GameLogic game = GameLogic.getInstance();
             game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).remove(this);
-            if (!game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).isEmpty()){
-                game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).get(0).setActive(true);
-            }
         }
     }
     public boolean canAttack(){
@@ -145,7 +139,6 @@ public abstract class BaseCharacterCard extends StackPane {
         this.hp = hp;
     }
     public void setBaseAttack(int baseAttack) {
-        if (baseAttack < 0) baseAttack = 0;
         this.baseAttack = baseAttack;
     }
     public WeaponType getWeaponType(){

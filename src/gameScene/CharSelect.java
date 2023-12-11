@@ -60,27 +60,32 @@ public class CharSelect extends VBox {
         nextBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+
                 if (selectedCharCards.size() == 3) {
                     //go to battle scene
-                    ArrayList<ArrayList<BaseCharacterCard>> cc = new ArrayList<>(2);
+                    try {
+                        Main.switchToGameBattle();
+                    } catch (Exception e) {
+
+                    }
                     for (VBox vb:selectedCharCards){
                         if (assasinBox.equals(vb)) {
-                            cc.get(0).add(new AssassinCard());
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new AssassinCard());
                         } else if (bardBox.equals(vb)) {
-                            cc.get(0).add(new BardCard());
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new BardCard());
                         } else if (flameArcherBox.equals(vb)) {
-                            cc.get(0).add(new FlameArcherCard());
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new FlameArcherCard());
                         } else if (knightBox.equals(vb)) {
-                            cc.get(0).add(new KnightCard());
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new KnightCard());
                         } else if (mageBox.equals(vb)) {
-                            cc.get(0).add(new MageCard());
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new MageCard());
                         } else if (palladinBox.equals(vb)) {
-                            cc.get(0).add(new PalladinCard());
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new PalladinCard());
                         } else if (priestBox.equals(vb)) {
-                            cc.get(0).add(new PriestCard());
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new PriestCard());
                         }
                     }
-                    GameLogic.getInstance().setCharacterCards(cc);
+
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please select 3 character cards!!!");
