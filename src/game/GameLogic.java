@@ -10,6 +10,7 @@ import card.SupportCard.weapons.BowCard;
 import card.SupportCard.weapons.GrimoireCard;
 import card.SupportCard.weapons.SwordCard;
 import gameScene.CharSelect;
+import gameScene.CharacterPane;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -197,6 +198,7 @@ public class GameLogic {
         initRound();
     }
     public void nextPlayerTurn(){
+        CharacterPane.getThread().start();
         currentPlayer = (currentPlayer + 1) % 2;
         if (characterCards.get(currentPlayer).isEmpty()) {
             if (currentPlayer == 1) win = true;
