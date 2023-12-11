@@ -4,6 +4,7 @@ import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 import game.WeaponType;
+import javafx.scene.image.Image;
 
 public class SwordCard extends WeaponCard{
     public SwordCard() {
@@ -27,5 +28,10 @@ public class SwordCard extends WeaponCard{
             if (e.getWeaponType() == WeaponType.SWORD) return true;
         }
         return false;
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("Sword.png").toString());
     }
 }

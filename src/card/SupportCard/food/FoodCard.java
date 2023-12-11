@@ -3,6 +3,7 @@ package card.SupportCard.food;
 import card.SupportCard.BaseSupportCard;
 import card.SupportCard.TargetSelectable;
 import game.GameLogic;
+import javafx.scene.image.Image;
 
 public abstract class FoodCard extends BaseSupportCard implements TargetSelectable {
     public FoodCard(int cost) {
@@ -21,4 +22,6 @@ public abstract class FoodCard extends BaseSupportCard implements TargetSelectab
     public void selectTarget() {
         //TODO: SELECT TARGETS THAT CAN EAT THIS FOOD (ON CLICK EVENT)
     }
+
+    public abstract Image getImage();
 }

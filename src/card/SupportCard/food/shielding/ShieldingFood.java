@@ -3,8 +3,9 @@ package card.SupportCard.food.shielding;
 import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.food.FoodCard;
 import game.GameLogic;
+import javafx.scene.image.Image;
 
-public class ShieldingFood extends FoodCard {
+public abstract class ShieldingFood extends FoodCard {
     private int amount;
     public ShieldingFood(int cost, int amount) {
         super(cost);
@@ -30,4 +31,5 @@ public class ShieldingFood extends FoodCard {
         if (amount < 0) amount = 0;
         this.amount = amount;
     }
+    public abstract Image getImage();
 }

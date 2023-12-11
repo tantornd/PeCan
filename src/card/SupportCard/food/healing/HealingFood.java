@@ -3,8 +3,9 @@ package card.SupportCard.food.healing;
 import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.food.FoodCard;
 import game.GameLogic;
+import javafx.scene.image.Image;
 
-public class HealingFood extends FoodCard {
+public abstract class HealingFood extends FoodCard {
     private int amount;
     public HealingFood(int cost, int amount) {
         super(cost);
@@ -30,4 +31,6 @@ public class HealingFood extends FoodCard {
         if (amount < 0) amount = 0;
         this.amount = amount;
     }
+
+    public abstract Image getImage();
 }
