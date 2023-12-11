@@ -56,7 +56,7 @@ public class GameLogic {
             ArrayList<BaseSupportCard> hand = new ArrayList<>();
             playerHands.add(hand);
             characterCards.add(new ArrayList<>());//ADD EMPTY ARRAYLIST TO ADD CHARACTERS IN
-            dice.add(8);
+            dice.add(10);
         }
         this.currentPlayer = 0;
     }
@@ -92,7 +92,7 @@ public class GameLogic {
 
         //TODO: ADD JAVA FX!!!!!
         //TODO: IF WIN GO TO WIN SCENE IF LOSE GO TO LOSE SCENE
-
+        clearInstance();
         Font font = Font.loadFont(ClassLoader.getSystemResourceAsStream("MINECRAFT_FONT.ttf"), 60);
         Font font2 = Font.loadFont(ClassLoader.getSystemResourceAsStream("MINECRAFT_FONT.ttf"), 80);
         VBox screen = new VBox();
@@ -157,7 +157,6 @@ public class GameLogic {
             draw(0, 1);
             draw(1, 1);
             resetDice();
-            resetFull();
             for(int i = 0; i < 2; i++){
                 if (buff.get(i) != null){ //GIVE CHARACTER BARD BUFFS
                     for (BaseCharacterCard e: characterCards.get(i)){
@@ -165,11 +164,14 @@ public class GameLogic {
                     }
                 }
                 if (!eventCards.get(i).isEmpty()){//GIVE CHARACTER EVENT CARD EFFECTS
+                    ArrayList<EventCard> temp = new ArrayList<>();
                     for (EventCard e: eventCards.get(i)){
-                        if (e == null) continue;
                         e.performEffect(i);
                         e.decrementRounds();
-                        if (e.getRounds() <= 0) e = null;
+                        if (e.getRounds() <= 0) temp.add(e);
+                    }
+                    for (EventCard e: temp){
+                        eventCards.get(i).remove(e);
                     }
                 }
             }
@@ -281,13 +283,6 @@ public class GameLogic {
         dice.set(0, 10);
         dice.set(1, 10);
     }
-    public void resetFull(){
-        for (int i = 0; i < 2; i++){
-            for (BaseCharacterCard e: characterCards.get(i)){
-                e.setFull(false);
-            }
-        }
-    }
     public BaseCharacterCard getActiveChara(ArrayList<BaseCharacterCard> characterCards){
         for (BaseCharacterCard e: characterCards){
             if (e.getActive()) return e;
@@ -380,18 +375,8 @@ public class GameLogic {
     public void setEventCards(EventCard eventCard) {
         if (this.eventCards.get(currentPlayer).size() < 4){
             this.eventCards.get(currentPlayer).add(eventCard);
-            return;
         }
-        boolean hasNull = false;
-        int idx = 0;
-        for (EventCard e: eventCards.get(currentPlayer)){
-            if (e == null){
-                hasNull = true;
-                idx = eventCards.get(currentPlayer).indexOf(e);
-                break;
-            }
-        }
-        if (!hasNull){
+        else{
             int temp = 0;
             for (int i = 1; i < 4; i++){
                 if (this.eventCards.get(currentPlayer).get(i).getRounds()
@@ -400,9 +385,6 @@ public class GameLogic {
                 }
             }
             this.eventCards.get(currentPlayer).set(temp, eventCard);
-        }
-        else{
-            this.eventCards.get(currentPlayer).set(idx, eventCard);
         }
     }
     public void setBotPlayedEvent(boolean botPlayedEvent) {

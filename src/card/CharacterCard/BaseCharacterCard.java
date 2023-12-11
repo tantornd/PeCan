@@ -25,7 +25,6 @@ public abstract class BaseCharacterCard extends StackPane {
     public int hp;
     public int baseAttack;
     public boolean active;
-    public boolean full;
 
     public BaseCharacterCard(WeaponType weaponType, int baseAttack){
         setWeaponType(weaponType);
@@ -169,13 +168,6 @@ public abstract class BaseCharacterCard extends StackPane {
         return active;
     }
 
-    public void setFull(boolean full) {
-        this.full = full;
-    }
-
-    public boolean isFull() {
-        return full;
-    }
 
     public abstract Image getImage();
 }
