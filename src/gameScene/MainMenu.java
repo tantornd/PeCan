@@ -1,7 +1,6 @@
-package mainMenu;
+package gameScene;
 
 import app.Main;
-import audio.Audio;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -17,14 +16,14 @@ public class MainMenu extends StackPane {
     private static ImageView titleText;
 
     public MainMenu() {
-        setPrefWidth(1280);
-        setPrefHeight(890);
+        setPrefWidth(1440);
+        setPrefHeight(900);
         setAlignment(Pos.CENTER);
 
         Image bg = new Image(ClassLoader.getSystemResource("test.gif").toString());
         javafx.scene.image.ImageView bgv = new javafx.scene.image.ImageView(bg);
-        bgv.setFitWidth(1280);
-        bgv.setFitHeight(890);
+        bgv.setFitWidth(1440);
+        bgv.setFitHeight(900);
         getChildren().add(bgv);
 
         StackPane startBorder = new StackPane();
@@ -48,7 +47,7 @@ public class MainMenu extends StackPane {
             @Override
             public void handle(Event arg0) {
                 // TODO Auto-generated method stub
-                //Main.switchToCharSelect();
+                Main.switchToCharSelect();
                 System.out.println("ok");
 
             }
