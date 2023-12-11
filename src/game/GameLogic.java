@@ -307,6 +307,7 @@ public class GameLogic {
                 for (BaseCharacterCard b: characterCards.get(i)){
                     b.setHp(b.getHp() - carryOnDamage.get(i).getDamage());
                     if (!b.isAlive()){
+                        b.switchActive();
                         characterCards.get(i).remove(b);
                     }
                 }
@@ -317,6 +318,7 @@ public class GameLogic {
                 getActiveChara(characterCards.get(i)).setHp(getActiveChara(characterCards.get(i)).getHp()
                         - carryOnDamage.get(i).getDamage());
                 if (!getActiveChara(characterCards.get(i)).isAlive()){
+                    getActiveChara(characterCards.get(i)).switchActive();
                     characterCards.remove(getActiveChara(characterCards.get(i)));
                 }
                 carryOnDamage.get(i).decrementRounds();

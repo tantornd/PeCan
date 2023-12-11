@@ -16,6 +16,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+
 public abstract class BaseCharacterCard extends StackPane {
     public WeaponType weaponType;
     public int energy;
@@ -75,12 +77,18 @@ public abstract class BaseCharacterCard extends StackPane {
 
     public void setActive(boolean active){
         this.active = active;
-        GameLogic.getInstance().useDice(1);
+    }
+    public void switchActive(){
+        GameLogic game = GameLogic.getInstance();
+        if (game.getCharacterCards().get(game.getCurrentPlayer()).size() >= 2) {
+            ArrayList<BaseCharacterCard> curChar = game.getCharacterCards().get(game.getCurrentPlayer());
+            curChar.get(curChar.indexOf(this)).setActive(false);
+            curChar.get((curChar.indexOf(this) + 1) % curChar.size()).setActive(true);
+            game.useDice(1);
 
-        //TODO: ADD JAVAFX!!!!!!!!!!! เวลาเปลี่ยนตัวที่ active ต้องเปลี่ยนช่องสกิลด้วย
+            //TODO: ADD JAVAFX!!!!!!!!!!! เวลาเปลี่ยนตัวที่ active ต้องมี ui ที่บอกว่าตัวนี้ active หรือเขียน class ใหม่เองละเรียกใช้ method นี้ก็ได้
+        }
 
-
-        GameLogic.getInstance().nextPlayerTurn();
     }
     public void takeDamage(int damage){
         if (shield > 0){
@@ -92,6 +100,7 @@ public abstract class BaseCharacterCard extends StackPane {
         }
         if (!isAlive()){
             GameLogic game = GameLogic.getInstance();
+            game.getActiveCharaOpponent(game.getCurrentPlayer()).switchActive();
             game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).remove(this);
         }
     }
