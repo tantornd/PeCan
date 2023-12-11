@@ -19,4 +19,12 @@ public class Buff {
     public int getAmount() {
         return amount;
     }
+
+    public void setRounds(int rounds) {
+        this.rounds = rounds;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }
