@@ -36,7 +36,7 @@ public class CharSelect extends VBox {
         ImageView text = new ImageView(textImg);
         getChildren().add(text);
 
-        Image bg = new Image(ClassLoader.getSystemResource("charSelectBG.png").toString());
+        Image bg = new Image(ClassLoader.getSystemResource("mainMenubg.png").toString());
         setBackground(new Background(new BackgroundFill(new ImagePattern(bg), CornerRadii.EMPTY, Insets.EMPTY)));
 
         addSelectableChar();
