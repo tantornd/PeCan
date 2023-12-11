@@ -1,6 +1,8 @@
 package card.SupportCard.food.shielding;
 
+import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.food.FoodCard;
+import game.GameLogic;
 
 public class ShieldingFood extends FoodCard {
     private int amount;
@@ -10,10 +12,14 @@ public class ShieldingFood extends FoodCard {
     }
     @Override
     public void play() {
-        //TODO: SELECT TARGET
-        //TODO: INCREASE TARGET'S SHIELD BY AMOUNT USING CHARACTERCARDS.GET(selected character) AND METHODS FROM CHARACTERCARD CLASS
-        //TODO: USEDICE(COST)
-        //NOTE: NO NEED TO NEXT PLAYER TURN, PLAYERS CAN KEEP USING SUPPORT CARDS
+        GameLogic game = GameLogic.getInstance();
+        int curPlayer = game.getCurrentPlayer();
+        BaseCharacterCard temp = game.getCharacterCards().get(curPlayer).get(0);
+        for (BaseCharacterCard e: game.getCharacterCards().get(curPlayer)){
+            if (e.getHp() < temp.getHp()) temp = e;
+        }
+        temp.setShield(temp.getShield() + amount);
+        game.getPlayerHands().get(game.getCurrentPlayer()).remove(this);
     }
 
     public int getAmount() {

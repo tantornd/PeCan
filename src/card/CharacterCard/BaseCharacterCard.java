@@ -21,7 +21,7 @@ public abstract class BaseCharacterCard extends StackPane {
     public int shield;
     public int hp;
     public int baseAttack;
-    public static boolean active;
+    public boolean active;
     public boolean full;
 
     public BaseCharacterCard(WeaponType weaponType, int baseAttack){
@@ -69,13 +69,21 @@ public abstract class BaseCharacterCard extends StackPane {
     }
 
     public void setActive(boolean active){
-        this.active = active;
-        GameLogic.getInstance().useDice(1);
+        if (GameLogic.getInstance().getDice().get(GameLogic.getInstance().getCurrentPlayer()) > 1) {
+            this.active = active;
+            GameLogic.getInstance().useDice(1);
 
-        //TODO: ADD JAVAFX!!!!!!!!!!! เวลาเปลี่ยนตัวที่ active ต้องเปลี่ยนช่องสกิลด้วย
+            //TODO: ADD JAVAFX!!!!!!!!!!!
 
+<<<<<<< HEAD
 
         GameLogic.getInstance().nextPlayerTurn();
+||||||| dd0b7d7
+        GameLogic.getInstance().nextPlayerTurn();
+=======
+            GameLogic.getInstance().nextPlayerTurn();
+        }
+>>>>>>> 0b833a77f605c0e2c49fbae86e0e1357b7ed070a
     }
     public void takeDamage(int damage){
         if (shield > 0){
@@ -88,6 +96,9 @@ public abstract class BaseCharacterCard extends StackPane {
         if (!isAlive()){
             GameLogic game = GameLogic.getInstance();
             game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).remove(this);
+            if (!game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).isEmpty()){
+                game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).get(0).setActive(true);
+            }
         }
     }
     public boolean canAttack(){
@@ -134,6 +145,7 @@ public abstract class BaseCharacterCard extends StackPane {
         this.hp = hp;
     }
     public void setBaseAttack(int baseAttack) {
+        if (baseAttack < 0) baseAttack = 0;
         this.baseAttack = baseAttack;
     }
     public WeaponType getWeaponType(){
