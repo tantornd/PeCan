@@ -138,7 +138,7 @@ public class GameLogic {
             screen.getChildren().add(button);
 
         } else {
-            Text text = new Text("GIT GUD");
+            Text text = new Text("YOU LOSE TT");
             text.setFont(font2);
             text.setFill(Color.WHITE);
             screen.getChildren().add(text);

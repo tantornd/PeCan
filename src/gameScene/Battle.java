@@ -3,10 +3,12 @@ package gameScene;
 import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.BaseSupportCard;
 import game.GameLogic;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -75,20 +77,43 @@ public class Battle extends BorderPane {
 
         VBox left = new VBox();
         HBox leftBottomPane = new HBox();
+
         Button atkBtn = new Button("ATK");
         atkBtn.setPrefHeight(150);
         atkBtn.setPrefWidth(150);
+        atkBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
+
         Button skillBtn = new Button("SKILL");
         skillBtn.setPrefWidth(150);
         skillBtn.setPrefHeight(150);
+        skillBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
+
         Button ultiBtn = new Button("ULTI");
         ultiBtn.setPrefHeight(150);
         ultiBtn.setPrefWidth(150);
+        ultiBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
+
         Text dice = new Text();
         leftBottomPane.getChildren().add(atkBtn);
         leftBottomPane.getChildren().add(skillBtn);
         leftBottomPane.getChildren().add(ultiBtn);
         leftBottomPane.getChildren().add(dice);
+        left.getChildren().add(leftBottomPane);
 
     }
 

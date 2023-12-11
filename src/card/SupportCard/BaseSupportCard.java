@@ -1,7 +1,9 @@
 package card.SupportCard;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -18,6 +20,14 @@ public abstract class BaseSupportCard extends StackPane {
         Image bg = getImage();
         setBackground(new Background(new BackgroundFill(new ImagePattern(bg), CornerRadii.EMPTY, Insets.EMPTY)));
 
+        setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (isPlayable()) {
+                    play();
+                }
+            }
+        });
 
     }
     public void setCost(int cost){
