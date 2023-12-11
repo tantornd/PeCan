@@ -5,6 +5,7 @@ import card.SupportCard.BaseSupportCard;
 import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 import game.WeaponType;
+import javafx.scene.image.Image;
 
 public class BowCard extends WeaponCard{
     public BowCard() {
@@ -28,5 +29,10 @@ public class BowCard extends WeaponCard{
             if (e.getWeaponType() == WeaponType.BOW) return true;
         }
         return false;
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("Bow.png").toString());
     }
 }

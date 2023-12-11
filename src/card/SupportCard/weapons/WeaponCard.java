@@ -4,6 +4,7 @@ import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.BaseSupportCard;
 import card.SupportCard.TargetSelectable;
 import game.GameLogic;
+import javafx.scene.image.Image;
 
 public abstract class WeaponCard extends BaseSupportCard implements TargetSelectable {
     public WeaponCard() {
@@ -22,4 +23,6 @@ public abstract class WeaponCard extends BaseSupportCard implements TargetSelect
         //TODO: HANDLE IF TARGET"S WEAPON TYPE DOESN'T MATCH
 
     }
+
+    public abstract Image getImage();
 }

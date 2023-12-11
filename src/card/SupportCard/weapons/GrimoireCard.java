@@ -4,6 +4,7 @@ import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 import game.WeaponType;
+import javafx.scene.image.Image;
 
 public class GrimoireCard extends WeaponCard{
     public GrimoireCard() {super();}
@@ -25,5 +26,10 @@ public class GrimoireCard extends WeaponCard{
             if (e.getWeaponType() == WeaponType.GRIMOIRE) return true;
         }
         return false;
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("Grimoire.png").toString());
     }
 }
