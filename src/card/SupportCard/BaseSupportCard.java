@@ -1,5 +1,6 @@
 package card.SupportCard;
 
+import gameScene.Battle;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
@@ -26,6 +27,7 @@ public abstract class BaseSupportCard extends StackPane {
                 if (isPlayable()) {
                     play();
                 }
+                Battle.getSupportT().start();
             }
         });
 
