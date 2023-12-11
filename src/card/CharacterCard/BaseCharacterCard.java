@@ -22,7 +22,7 @@ public abstract class BaseCharacterCard extends StackPane {
     public int shield;
     public int hp;
     public int baseAttack;
-    public static boolean active;
+    public boolean active;
     public boolean full;
 
     public BaseCharacterCard(WeaponType weaponType, int baseAttack){
