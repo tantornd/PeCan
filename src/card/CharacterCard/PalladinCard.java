@@ -2,6 +2,7 @@ package card.CharacterCard;
 
 import game.GameLogic;
 import game.WeaponType;
+import javafx.scene.image.Image;
 
 public class PalladinCard extends BaseCharacterCard {
     public PalladinCard() {
@@ -30,5 +31,9 @@ public class PalladinCard extends BaseCharacterCard {
             }
             game.nextPlayerTurn();
         }
+    }
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("palladinCard.png").toString());
     }
 }

@@ -2,6 +2,7 @@ package card.CharacterCard;
 
 import game.GameLogic;
 import game.WeaponType;
+import javafx.scene.image.Image;
 
 public class AssassinCard extends BaseCharacterCard {
     public AssassinCard() {
@@ -36,5 +37,9 @@ public class AssassinCard extends BaseCharacterCard {
             }
             game.nextPlayerTurn();
         }
+    }
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("assasinCard.png").toString());
     }
 }

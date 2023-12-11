@@ -1,5 +1,6 @@
 package game;
 
+import app.Main;
 import card.CharacterCard.BaseCharacterCard;
 import card.CharacterCard.GetCharacterType;
 import card.SupportCard.BaseSupportCard;
@@ -8,6 +9,18 @@ import card.SupportCard.food.GetAllFood;
 import card.SupportCard.weapons.BowCard;
 import card.SupportCard.weapons.GrimoireCard;
 import card.SupportCard.weapons.SwordCard;
+import gameScene.CharSelect;
+import javafx.application.Platform;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import util.Randomizer;
 
 import java.util.ArrayList;
@@ -56,6 +69,8 @@ public class GameLogic {
 
         //TODO: ADD JAVA FX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+
+
         for (int i = 0; i < 3; i++) {
             deck.add(new BowCard());
             deck.add(new GrimoireCard());
@@ -77,8 +92,62 @@ public class GameLogic {
         //TODO: ADD JAVA FX!!!!!
         //TODO: IF WIN GO TO WIN SCENE IF LOSE GO TO LOSE SCENE
 
+        Font font = Font.loadFont(ClassLoader.getSystemResourceAsStream("MINECRAFT_FONT.ttf"), 60);
+        Font font2 = Font.loadFont(ClassLoader.getSystemResourceAsStream("MINECRAFT_FONT.ttf"), 80);
+        VBox screen = new VBox();
+        screen.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
+        screen.setAlignment(Pos.CENTER);
+        HBox button = new HBox();
+        Text restart = new Text("RESTART");
+        restart.setFill(Color.WHITE);
+        restart.setFont(font);
+        Text quit = new Text("QUIT");
+        quit.setFont(font);
+        quit.setFill(Color.WHITE);
+        button.setAlignment(Pos.CENTER);
+        screen.setSpacing(120);
+        screen.setPrefHeight(900);
+        screen.setPrefWidth(1440);
+        button.getChildren().add(restart);
+        button.getChildren().add(quit);
+        button.setSpacing(120);
+
+
+        Scene scene = new Scene(screen);
+        restart.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Main.charSelect = new CharSelect();
+                Main.charSelectScene = new Scene(Main.charSelect);
+                Main.stage.setScene(Main.charSelectScene);
+            }
+        });
+        quit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Platform.exit();
+            }
+        });
+        if (win) {
+            Text text = new Text("YOU WIN!!");
+            text.setFont(font2);
+            text.setFill(Color.WHITE);
+            screen.getChildren().add(text);
+            screen.getChildren().add(button);
+
+        } else {
+            Text text = new Text("GIT GUD");
+            text.setFont(font2);
+            text.setFill(Color.WHITE);
+            screen.getChildren().add(text);
+            screen.getChildren().add(button);
+        }
+        Main.stage.setScene(scene);
     }
+
+
+
     public void initRound(){
         if (gameEnd){
             endGame();
