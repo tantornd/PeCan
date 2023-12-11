@@ -1,6 +1,8 @@
-package card.SupportCard.food;
+package card.SupportCard.food.healing;
 
-public class HealingFood extends FoodCard{
+import card.SupportCard.food.FoodCard;
+
+public class HealingFood extends FoodCard {
     private int amount;
     public HealingFood(int cost, int amount) {
         super(cost);
@@ -8,10 +10,11 @@ public class HealingFood extends FoodCard{
     }
     @Override
     public void play() {
-        //TODO: CHECK IF IS PLAYABLE
         //TODO: SELECT TARGET
+        //TODO: CHECK IF TARGET IS FULL, IF FULL DO NOTHING
         //TODO: INCREASE TARGET'S HP BY AMOUNT USING CHARACTERCARDS.GET(selected character) AND METHODS FROM CHARACTERCARD CLASS
-        //TODO: USE DICE
+        //TODO: SET TARGET FULL TO TRUE
+        //TODO: USEDICE(GETCOST)
         //NOTE: NO NEED TO NEXT PLAYER TURN, PLAYERS CAN KEEP USING SUPPORT CARDS
     }
 

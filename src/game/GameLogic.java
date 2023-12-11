@@ -1,8 +1,9 @@
 package game;
 
 import card.CharacterCard.BaseCharacterCard;
-import card.CharacterCard.GetType;
+import card.CharacterCard.GetCharacterType;
 import card.SupportCard.BaseSupportCard;
+import card.SupportCard.food.GetAllFood;
 import card.SupportCard.weapons.BowCard;
 import card.SupportCard.weapons.GrimoireCard;
 import card.SupportCard.weapons.SwordCard;
@@ -50,11 +51,13 @@ public class GameLogic {
 
         //TODO: ADD JAVA FX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        //Waiting for constructors and adding support card
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             deck.add(new BowCard());
             deck.add(new GrimoireCard());
             deck.add(new SwordCard());
+        }
+        for (int i = 0; i < 3; i++){
+            deck.addAll(GetAllFood.getAll());
         }
         // Shuffle and hand out 5 cards to each player
         Collections.shuffle(deck);
@@ -78,6 +81,7 @@ public class GameLogic {
             draw(0, 1);
             draw(1, 1);
             resetDice();
+            resetFull();
             for(int i = 0; i < 2; i++){
                 if (buff.get(i) != null){
                     for (BaseCharacterCard e: characterCards.get(i)){
@@ -160,11 +164,11 @@ public class GameLogic {
         return !not_found;
     }
     public void newEnemyCharacters(){
-        characterCards.get(1).add(Randomizer.getRandomElement(GetType.getDmgType()));
-        BaseCharacterCard temp = Randomizer.getRandomElement(GetType.getDmgType());
-        while(temp == characterCards.get(1).get(0)) temp = Randomizer.getRandomElement(GetType.getDmgType());
+        characterCards.get(1).add(Randomizer.getRandomElement(GetCharacterType.getDmgType()));
+        BaseCharacterCard temp = Randomizer.getRandomElement(GetCharacterType.getDmgType());
+        while(temp == characterCards.get(1).get(0)) temp = Randomizer.getRandomElement(GetCharacterType.getDmgType());
         characterCards.get(1).add(temp);
-        characterCards.get(1).add(Randomizer.getRandomElement(GetType.getSupportType()));
+        characterCards.get(1).add(Randomizer.getRandomElement(GetCharacterType.getSupportType()));
     }
     public ArrayList<BaseSupportCard> draw(int player, int amount){
         if (amount > deck.size()){
@@ -181,6 +185,13 @@ public class GameLogic {
     public void resetDice(){
         dice.set(0, 10);
         dice.set(1, 10);
+    }
+    public void resetFull(){
+        for (int i = 0; i < 2; i++){
+            for (BaseCharacterCard e: characterCards.get(i)){
+                e.setFull(false);
+            }
+        }
     }
     public BaseCharacterCard getActiveChara(ArrayList<BaseCharacterCard> characterCards){
         for (BaseCharacterCard e: characterCards){

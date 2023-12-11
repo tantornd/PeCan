@@ -2,7 +2,7 @@ package card.CharacterCard;
 
 import java.util.ArrayList;
 
-public class GetType { //Used in GameLogic
+public class GetCharacterType { //Used in GameLogic
     public static ArrayList<BaseCharacterCard> getDmgType(){
         ArrayList<BaseCharacterCard> out = new ArrayList<>();
         out.add(new AssassinCard());

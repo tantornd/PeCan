@@ -10,6 +10,7 @@ public abstract class BaseCharacterCard {
     public int hp;
     public int baseAttack;
     public static boolean active;
+    public boolean full;
 
     public BaseCharacterCard(WeaponType weaponType, int baseAttack){
         setWeaponType(weaponType);
@@ -104,5 +105,13 @@ public abstract class BaseCharacterCard {
     }
     public boolean getActive(){
         return active;
+    }
+
+    public void setFull(boolean full) {
+        this.full = full;
+    }
+
+    public boolean isFull() {
+        return full;
     }
 }

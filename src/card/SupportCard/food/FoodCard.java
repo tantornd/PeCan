@@ -14,13 +14,11 @@ public abstract class FoodCard extends BaseSupportCard implements TargetSelectab
 
     @Override
     public boolean isPlayable() {
-        GameLogic game = GameLogic.getInstance();
-        return game.getDice().get(game.getCurrentPlayer()) > getCost();
+        return false; //WE DO NOT NEED TO PLAY FOOD CARD IF WE DON'T WANT TO
     }
 
     @Override
     public void selectTarget() {
-        //TODO: SELECT TARGETS THAT CAN EQUIP THIS WEAPON (ON CLICK EVENT)
-        //TODO: HANDLE IF TARGET"S WEAPON TYPE DOESN'T MATCH
+        //TODO: SELECT TARGETS THAT CAN EAT THIS FOOD (ON CLICK EVENT)
     }
 }
