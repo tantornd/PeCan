@@ -15,7 +15,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-
+public abstract class BaseCharacterCard {
+    private WeaponType weaponType;
+    private int energy;
+    private int shield;
+    private int hp;
+    public int baseAttack;
+    private boolean active;
+    private boolean full;
 public abstract class BaseCharacterCard extends StackPane {
     public WeaponType weaponType;
     public int energy;
