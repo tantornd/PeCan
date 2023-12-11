@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -20,8 +21,9 @@ import java.util.ArrayList;
 
 public class CharSelect extends VBox {
 
-    private ArrayList<VBox> selectedCharCards;
-    private HBox selectableChar, selectedChar, btnBar;
+    private final ArrayList<VBox> selectedCharCards;
+    private HBox selectableChar;
+    private final HBox selectedChar;
     private VBox assasinBox, bardBox, flameArcherBox, knightBox, mageBox, palladinBox, priestBox;
 
 
@@ -49,8 +51,9 @@ public class CharSelect extends VBox {
         getChildren().add(selectedChar);
 
 
-        btnBar = new HBox();
+        HBox btnBar = new HBox();
         btnBar.setPrefWidth(1440);
+        btnBar.setSpacing(55);
 
         Button nextBtn = new Button("Next");
         nextBtn.setPrefHeight(100);
@@ -60,6 +63,7 @@ public class CharSelect extends VBox {
             public void handle(MouseEvent mouseEvent) {
                 if (selectedCharCards.size() == 3) {
                     //go to battle scene
+
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please select 3 character cards!!!");
                     alert.show();
@@ -74,6 +78,8 @@ public class CharSelect extends VBox {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Main.charSelect = new CharSelect();
+                Main.charSelectScene = new Scene(Main.charSelect);
+                Main.stage.setScene(Main.charSelectScene);
             }
         });
 
@@ -94,6 +100,7 @@ public class CharSelect extends VBox {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "characters info");
+                a.show();
             }
         });
         btnBar.getChildren().add(infoBtn);
@@ -182,26 +189,15 @@ public class CharSelect extends VBox {
 
     }
     private void addSelectedChar(VBox charCard) {
-        boolean addBox = true;
-        for (int i = 0; i<selectedCharCards.size(); i++) {
-            if (selectedCharCards.get(i).equals(charCard)) {
-                Alert a = new Alert(Alert.AlertType.ERROR, "can not select the same character card");
-                a.show();
-                addBox = false;
-                break;
-            }
-            if (i > 2) {
-                addBox = false;
-                Alert a = new Alert(Alert.AlertType.ERROR, "can not select more than 3 character cards");
-                a.show();
-                break;
-            }
-        }
-        if (addBox) {
+        if (selectedCharCards.size() < 3) {
             selectedCharCards.add(charCard);
             selectedChar.getChildren().add(charCard);
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR, "can not select more than 3 character cards");
+            a.show();
         }
     }
+
 
 
 
