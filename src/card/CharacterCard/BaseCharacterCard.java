@@ -4,13 +4,13 @@ import game.GameLogic;
 import game.WeaponType;
 
 public abstract class BaseCharacterCard {
-    public WeaponType weaponType;
-    public int energy;
-    public int shield;
-    public int hp;
+    private WeaponType weaponType;
+    private int energy;
+    private int shield;
+    private int hp;
     public int baseAttack;
-    public boolean active;
-    public boolean full;
+    private boolean active;
+    private boolean full;
 
     public BaseCharacterCard(WeaponType weaponType, int baseAttack){
         setWeaponType(weaponType);
