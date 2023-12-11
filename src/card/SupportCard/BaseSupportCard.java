@@ -1,5 +1,6 @@
 package card.SupportCard;
 
+import card.SupportCard.event.EventCard;
 import gameScene.Battle;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -28,6 +29,7 @@ public abstract class BaseSupportCard extends StackPane {
                     play();
                 }
                 Battle.getSupportT().start();
+
             }
         });
 

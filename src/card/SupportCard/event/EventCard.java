@@ -2,6 +2,7 @@ package card.SupportCard.event;
 
 import card.SupportCard.BaseSupportCard;
 import game.GameLogic;
+import gameScene.SupportPane;
 import javafx.scene.image.Image;
 
 public abstract class EventCard extends BaseSupportCard {
@@ -24,6 +25,8 @@ public abstract class EventCard extends BaseSupportCard {
         game.getPlayerHands().get(game.getCurrentPlayer()).remove(this);
 
         //TODO: ADD JAVA FX FOR SETTING EVENT CARD IN SUPPORT SKILL ZONE
+        SupportPane.getPlayerEventT().start();
+        performEffect(GameLogic.getInstance().getCurrentPlayer());
 
     }
     @Override

@@ -52,6 +52,8 @@ public class Battle extends BorderPane {
                 });
             }
         });
+        middle.getChildren().add(playerSupport);
+        middle.getChildren().add(characterPane);
 
         VBox left = new VBox();
         HBox leftBottomPane = new HBox();

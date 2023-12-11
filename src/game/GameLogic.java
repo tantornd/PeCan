@@ -414,5 +414,8 @@ public class GameLogic {
     public boolean isBotPlayedEvent() {
         return botPlayedEvent;
     }
+    public ArrayList<ArrayList<EventCard>> getEventCards() {
+        return eventCards;
+    }
 
 }
