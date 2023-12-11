@@ -3,6 +3,7 @@ package game;
 import card.CharacterCard.BaseCharacterCard;
 import card.CharacterCard.GetCharacterType;
 import card.SupportCard.BaseSupportCard;
+import card.SupportCard.event.EventCard;
 import card.SupportCard.food.GetAllFood;
 import card.SupportCard.weapons.BowCard;
 import card.SupportCard.weapons.GrimoireCard;
@@ -19,6 +20,7 @@ public class GameLogic {
     private ArrayList<Integer> dice;
     private ArrayList<CarryOnDamage> carryOnDamage; //IF NONE, ARRAYLIST HOLDS NULL
     private ArrayList<Buff> buff;
+    private ArrayList<ArrayList<EventCard>> eventCards;
     private int currentPlayer;
     private static GameLogic instance;
     private static boolean gameEnd;
@@ -30,6 +32,9 @@ public class GameLogic {
         this.dice = new ArrayList<>(2);
         this.carryOnDamage = new ArrayList<>(2);
         this.buff = new ArrayList<>(2);
+        this.eventCards = new ArrayList<>(2);
+        this.eventCards.set(0, new ArrayList<>(4));
+        this.eventCards.set(1, new ArrayList<>(4));
         gameEnd = false;
         win = false;
         for (int i = 0; i < 2; i++) {
@@ -83,9 +88,17 @@ public class GameLogic {
             resetDice();
             resetFull();
             for(int i = 0; i < 2; i++){
-                if (buff.get(i) != null){
+                if (buff.get(i) != null){ //GIVE CHARACTER BARD BUFFS
                     for (BaseCharacterCard e: characterCards.get(i)){
                         e.setBaseAttack(e.getBaseAttack() + buff.get(i).getAmount());
+                    }
+                }
+                if (!eventCards.get(i).isEmpty()){//GIVE CHARACTER EVENT CARD EFFECTS
+                    for (EventCard e: eventCards.get(i)){
+                        if (e == null) continue;
+                        e.performEffect();
+                        e.decrementRounds();
+                        if (e.getRounds() <= 0) e = null;
                     }
                 }
             }
@@ -114,21 +127,23 @@ public class GameLogic {
     }
     public void nextPlayerTurn(){
         currentPlayer = (currentPlayer + 1) % 2;
-        //TODO TANTORN: ADD BOT COMMAND HERE
-
-        //TODO: ADD JAVA FX FOR PLAYER
-
         if (characterCards.get(currentPlayer).isEmpty()) {
             if (currentPlayer == 1) win = true;
             gameEnd = true;
             endGame();
         }
         else{
-            if (!canAttack(0) && !canAttack(1)) {
+            if (canAttack(currentPlayer) || isHandPlayable(currentPlayer)){
+
+                //TODO TANTORN: ADD BOT COMMAND HERE
+
+                //TODO: ADD JAVA FX FOR PLAYER
+
+            }
+            else if (!canAttack(0) && !canAttack(1)) {
                 if (!isHandPlayable(0) && !isHandPlayable(1)) endRound();
                 else if (!isHandPlayable(currentPlayer)) nextPlayerTurn();
                 //IF CURRENT PLAYER CANNOT PLAY CARD IN HAND GO TO NEXT PLAYER
-                //IF HAND IS PLAYABLE DO NOTHING
             }
             else if (!canAttack(currentPlayer)) nextPlayerTurn();
         }
@@ -139,16 +154,8 @@ public class GameLogic {
     }
     public boolean canAttack(int idx){
         ArrayList<BaseCharacterCard> player = characterCards.get(idx);
-        boolean not_found = true;
-        int i = 0;
-        while (not_found && i < player.size()){
-            BaseCharacterCard temp = player.get(i);
-            i += 1;
-            if (temp.canAttack()){
-                not_found = false;
-            }
-        }
-        return !not_found;
+        BaseCharacterCard activeChara = getActiveChara(player);
+        return activeChara.canAttack();
     }
     public boolean isHandPlayable(int idx){
         ArrayList<BaseSupportCard> player = playerHands.get(idx);
@@ -180,6 +187,9 @@ public class GameLogic {
             playerHands.get(player).add(deck.get(deck.size()-1));
             deck.remove(deck.size()-1);
         }
+
+        //TODO: ADD JAVAFX FOR DRAWING
+
         return out;
     }
     public void resetDice(){
@@ -276,4 +286,34 @@ public class GameLogic {
     public ArrayList<Buff> getBuff() {
         return buff;
     }
+
+    public void setEventCards(EventCard eventCard) {
+        if (this.eventCards.get(currentPlayer).size() < 4){
+            this.eventCards.get(currentPlayer).add(eventCard);
+            return;
+        }
+        boolean hasNull = false;
+        int idx = 0;
+        for (EventCard e: eventCards.get(currentPlayer)){
+            if (e == null){
+                hasNull = true;
+                idx = eventCards.get(currentPlayer).indexOf(e);
+                break;
+            }
+        }
+        if (!hasNull){
+            int temp = 0;
+            for (int i = 1; i < 4; i++){
+                if (this.eventCards.get(currentPlayer).get(i).getRounds()
+                < this.eventCards.get(currentPlayer).get(temp).getRounds()){
+                    temp = i;
+                }
+            }
+            this.eventCards.get(currentPlayer).set(temp, eventCard);
+        }
+        else{
+            this.eventCards.get(currentPlayer).set(idx, eventCard);
+        }
+    }
+
 }
