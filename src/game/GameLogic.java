@@ -116,6 +116,7 @@ public class GameLogic {
 
         if (characterCards.get(currentPlayer).isEmpty()) {
             if (currentPlayer == 1) win = true;
+            gameEnd = true;
             endGame();
         }
         else{
@@ -186,6 +187,9 @@ public class GameLogic {
             if (e.getActive()) return e;
         }
         return null;
+    }
+    public void useDice(int amount){
+        setDice(getCurrentPlayer(), getDice().get(currentPlayer) - amount);
     }
     public void takeCarryOnDamage(){
         for (int i = 0; i < 2; i++){

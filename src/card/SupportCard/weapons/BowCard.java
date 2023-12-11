@@ -6,7 +6,7 @@ import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 import game.WeaponType;
 
-public class BowCard extends WeaponCard implements TargetSelectable {
+public class BowCard extends WeaponCard{
     public BowCard() {
         super();
     }
@@ -26,11 +26,5 @@ public class BowCard extends WeaponCard implements TargetSelectable {
             if (e.getWeaponType() == WeaponType.BOW) return true;
         }
         return false;
-    }
-
-    @Override
-    public void selectTarget() {
-        //TODO: SELECT TARGETS THAT CAN EQUIP THIS WEAPON (ON CLICK EVENT)
-        //TODO: HANDLE IF TARGET"S WEAPON TYPE DOESN'T MATCH
     }
 }

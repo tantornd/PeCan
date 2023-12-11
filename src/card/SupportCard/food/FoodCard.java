@@ -1,19 +1,22 @@
-package card.SupportCard.weapons;
+package card.SupportCard.food;
 
-import card.CharacterCard.BaseCharacterCard;
 import card.SupportCard.BaseSupportCard;
 import card.SupportCard.TargetSelectable;
 import game.GameLogic;
 
-public abstract class WeaponCard extends BaseSupportCard implements TargetSelectable {
-    public WeaponCard() {
-        super(2);
+public abstract class FoodCard extends BaseSupportCard implements TargetSelectable {
+    public FoodCard(int cost) {
+        super(cost);
     }
+
     @Override
     public abstract void play();
 
     @Override
-    public abstract boolean isPlayable();
+    public boolean isPlayable() {
+        GameLogic game = GameLogic.getInstance();
+        return game.getDice().get(game.getCurrentPlayer()) > getCost();
+    }
 
     @Override
     public void selectTarget() {

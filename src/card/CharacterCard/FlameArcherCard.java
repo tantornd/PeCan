@@ -14,7 +14,7 @@ public class FlameArcherCard extends BaseCharacterCard{
     public void useSkill() {
         if (canUseSkill()){
             GameLogic game = GameLogic.getInstance();
-            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            game.useDice(3);
             setEnergy(getEnergy() + 1);
             game.getActiveChara(game.getOpponentChar()).takeDamage(baseAttack);
             game.getCarryOnDamage().set(game.getCurrentPlayer(), new CarryOnDamage(2, 1, false));
@@ -26,7 +26,7 @@ public class FlameArcherCard extends BaseCharacterCard{
     public void useUltimate() {
         GameLogic game = GameLogic.getInstance();
         if (canUseUltimate()) {
-            game.setDice(game.getCurrentPlayer(), game.getDice().get(game.getCurrentPlayer()) - 3);
+            game.useDice(3);
             setEnergy(0);
             for (BaseCharacterCard e : game.getOpponentChar()) {
                 e.takeDamage(baseAttack);
