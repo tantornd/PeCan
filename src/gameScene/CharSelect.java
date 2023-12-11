@@ -1,9 +1,8 @@
 package gameScene;
 
 import app.Main;
-import card.CharacterCard.AssassinCard;
-import card.CharacterCard.BardCard;
-import card.CharacterCard.BaseCharacterCard;
+import card.CharacterCard.*;
+import game.GameLogic;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -63,6 +62,25 @@ public class CharSelect extends VBox {
             public void handle(MouseEvent mouseEvent) {
                 if (selectedCharCards.size() == 3) {
                     //go to battle scene
+                    ArrayList<ArrayList<BaseCharacterCard>> cc = new ArrayList<>(2);
+                    for (VBox vb:selectedCharCards){
+                        if (assasinBox.equals(vb)) {
+                            cc.get(0).add(new AssassinCard());
+                        } else if (bardBox.equals(vb)) {
+                            cc.get(0).add(new BardCard());
+                        } else if (flameArcherBox.equals(vb)) {
+                            cc.get(0).add(new FlameArcherCard());
+                        } else if (knightBox.equals(vb)) {
+                            cc.get(0).add(new KnightCard());
+                        } else if (mageBox.equals(vb)) {
+                            cc.get(0).add(new MageCard());
+                        } else if (palladinBox.equals(vb)) {
+                            cc.get(0).add(new PalladinCard());
+                        } else if (priestBox.equals(vb)) {
+                            cc.get(0).add(new PriestCard());
+                        }
+                    }
+                    GameLogic.getInstance().setCharacterCards(cc);
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please select 3 character cards!!!");

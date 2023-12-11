@@ -36,6 +36,9 @@ public class Main extends Application{
     public static void switchToMainMenu() {
         stage.setScene(mainMenuScene);
     }
+    public static void switchToGameBattle() {
+
+    }
     public static void main(String[] args) {
         Application.launch(args);
     }

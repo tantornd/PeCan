@@ -1,4 +1,7 @@
 package gameScene;
 
-public class Battle {
+import javafx.scene.layout.GridPane;
+
+public class Battle extends GridPane {
+
 }

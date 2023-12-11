@@ -77,6 +77,7 @@ public class GameLogic {
         //TODO: ADD JAVA FX!!!!!
         //TODO: IF WIN GO TO WIN SCENE IF LOSE GO TO LOSE SCENE
 
+
     }
     public void initRound(){
         if (gameEnd){
