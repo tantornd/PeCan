@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 public class Weaken extends EventCard{
 
     public Weaken() {
-        super(3, 1);
+        super(3, 2);
     }
 
     @Override
