@@ -3,6 +3,7 @@ package game;
 import card.CharacterCard.BaseCharacterCard;
 import card.CharacterCard.GetCharacterType;
 import card.SupportCard.BaseSupportCard;
+import card.SupportCard.event.EventCard;
 import card.SupportCard.food.GetAllFood;
 import card.SupportCard.weapons.BowCard;
 import card.SupportCard.weapons.GrimoireCard;
@@ -19,6 +20,7 @@ public class GameLogic {
     private ArrayList<Integer> dice;
     private ArrayList<CarryOnDamage> carryOnDamage; //IF NONE, ARRAYLIST HOLDS NULL
     private ArrayList<Buff> buff;
+    private ArrayList<ArrayList<EventCard>> eventCards;
     private int currentPlayer;
     private static GameLogic instance;
     private static boolean gameEnd;
@@ -107,6 +109,7 @@ public class GameLogic {
                 }
             }
         }
+        resetEventCards();
 
          //TODO: ADD JAVA FX!!!!!!!!!!!!!!!!!
 
@@ -180,6 +183,9 @@ public class GameLogic {
             playerHands.get(player).add(deck.get(deck.size()-1));
             deck.remove(deck.size()-1);
         }
+
+        //TODO: ADD JAVAFX FOR DRAWING
+
         return out;
     }
     public void resetDice(){
@@ -190,6 +196,14 @@ public class GameLogic {
         for (int i = 0; i < 2; i++){
             for (BaseCharacterCard e: characterCards.get(i)){
                 e.setFull(false);
+            }
+        }
+    }
+    public void resetEventCards(){
+        for (int i = 0; i < 2; i++){
+            for (EventCard e: eventCards.get(i)){
+                e.decrementRounds();
+                if (e.getRounds() <= 0) eventCards.get(i).remove(e);
             }
         }
     }
@@ -276,4 +290,21 @@ public class GameLogic {
     public ArrayList<Buff> getBuff() {
         return buff;
     }
+
+    public void setEventCards(EventCard eventCard) {
+        if (this.eventCards.get(currentPlayer).size() == 4){
+            int temp = 0;
+            for (int i = 1; i < 4; i++){
+                if (this.eventCards.get(currentPlayer).get(i).getRounds()
+                < this.eventCards.get(currentPlayer).get(temp).getRounds()){
+                    temp = i;
+                }
+            }
+            this.eventCards.get(currentPlayer).set(temp, eventCard);
+        }
+        else{
+            this.eventCards.get(currentPlayer).add(eventCard);
+        }
+    }
+
 }
