@@ -1,9 +1,16 @@
 package card.SupportCard;
 
-public abstract class BaseSupportCard {
+import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
+
+public abstract class BaseSupportCard extends StackPane {
     private int cost;
     public BaseSupportCard(int cost){
         setCost(cost);
+
+        setPrefHeight(240);
+        setPrefWidth(160);
+
     }
     public void setCost(int cost){
         if (cost <= 0) cost = 0;
@@ -14,4 +21,5 @@ public abstract class BaseSupportCard {
     }
     public abstract void play();
     public abstract boolean isPlayable();
+    public abstract Image getImage();
 }
