@@ -2,6 +2,7 @@ package card.SupportCard.event;
 
 import card.CharacterCard.BaseCharacterCard;
 import game.GameLogic;
+import javafx.scene.image.Image;
 
 public class StimBeacon extends EventCard{
     public StimBeacon() {
@@ -14,5 +15,10 @@ public class StimBeacon extends EventCard{
         for (BaseCharacterCard e: game.getCharacterCards().get(player)){
             e.setBaseAttack(e.getBaseAttack() + 1);
         }
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("StimBeacon.png").toString());
     }
 }

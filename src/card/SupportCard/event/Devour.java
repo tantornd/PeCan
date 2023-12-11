@@ -2,6 +2,7 @@ package card.SupportCard.event;
 
 import card.CharacterCard.BaseCharacterCard;
 import game.GameLogic;
+import javafx.scene.image.Image;
 
 public class Devour extends EventCard{
     public Devour() {
@@ -21,5 +22,10 @@ public class Devour extends EventCard{
             }
             temp.setHp(temp.getHp() + 1);
         }
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("Devour.png").toString());
     }
 }

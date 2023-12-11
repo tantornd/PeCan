@@ -2,6 +2,7 @@ package card.SupportCard.event;
 
 import card.SupportCard.BaseSupportCard;
 import game.GameLogic;
+import javafx.scene.image.Image;
 
 public abstract class EventCard extends BaseSupportCard {
     private int rounds;
@@ -39,4 +40,6 @@ public abstract class EventCard extends BaseSupportCard {
     public int getRounds() {
         return rounds;
     }
+
+    public abstract Image getImage();
 }

@@ -1,7 +1,12 @@
 package card.SupportCard;
 
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.ImagePattern;
 
 public abstract class BaseSupportCard extends StackPane {
     private int cost;
@@ -10,6 +15,9 @@ public abstract class BaseSupportCard extends StackPane {
 
         setPrefHeight(240);
         setPrefWidth(160);
+        Image bg = getImage();
+        setBackground(new Background(new BackgroundFill(new ImagePattern(bg), CornerRadii.EMPTY, Insets.EMPTY)));
+
 
     }
     public void setCost(int cost){
