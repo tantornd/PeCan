@@ -2,7 +2,19 @@ package card.CharacterCard;
 
 import game.GameLogic;
 import game.WeaponType;
-
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 public abstract class BaseCharacterCard {
     private WeaponType weaponType;
     private int energy;
@@ -11,6 +23,14 @@ public abstract class BaseCharacterCard {
     public int baseAttack;
     private boolean active;
     private boolean full;
+public abstract class BaseCharacterCard extends StackPane {
+    public WeaponType weaponType;
+    public int energy;
+    public int shield;
+    public int hp;
+    public int baseAttack;
+    public static boolean active;
+    public boolean full;
 
     public BaseCharacterCard(WeaponType weaponType, int baseAttack){
         setWeaponType(weaponType);
@@ -19,17 +39,55 @@ public abstract class BaseCharacterCard {
         setShield(0);
         setHp(10);
         setActive(false);
+
+        setPrefHeight(240);
+        setPrefWidth(160);
+        Image bg = getImage();
+        setBackground(new Background(new BackgroundFill(new ImagePattern(bg), CornerRadii.EMPTY, Insets.EMPTY)));
+        Circle circle1 = new Circle(50, Color.WHITE);
+        Text Hp = new Text();
+        Circle circle2 = new Circle(50, Color.WHITE);
+        Text ener = new Text();
+        getChildren().add(circle1);
+        getChildren().add(circle2);
+        getChildren().add(Hp);
+        getChildren().add(ener);
+        setAlignment(circle1, Pos.TOP_LEFT);
+        setAlignment(Hp, Pos.TOP_LEFT);
+        setAlignment(circle2, Pos.BOTTOM_RIGHT);
+        setAlignment(ener, Pos.BOTTOM_RIGHT);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Hp.setText(String.valueOf(hp));
+                        ener.setText(String.valueOf(energy));
+                    }
+                });
+            }
+        });
+        t.start();
+        setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (!active) {
+                    Alert a = new Alert(Alert.AlertType.CONFIRMATION, "R U Sure?");
+                    a.show();
+                }
+            }
+        });
     }
 
     public void setActive(boolean active){
-        if (GameLogic.getInstance().getDice().get(GameLogic.getInstance().getCurrentPlayer()) > 1) {
-            this.active = active;
-            GameLogic.getInstance().useDice(1);
+        this.active = active;
+        GameLogic.getInstance().useDice(1);
 
-            //TODO: ADD JAVAFX!!!!!!!!!!!
+        //TODO: ADD JAVAFX!!!!!!!!!!! เวลาเปลี่ยนตัวที่ active ต้องเปลี่ยนช่องสกิลด้วย
 
-            GameLogic.getInstance().nextPlayerTurn();
-        }
+
+        GameLogic.getInstance().nextPlayerTurn();
     }
     public void takeDamage(int damage){
         if (shield > 0){
@@ -42,9 +100,6 @@ public abstract class BaseCharacterCard {
         if (!isAlive()){
             GameLogic game = GameLogic.getInstance();
             game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).remove(this);
-            if (!game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).isEmpty()){
-                game.getCharacterCards().get((game.getCurrentPlayer() + 1) % 2).get(0).setActive(true);
-            }
         }
     }
     public boolean canAttack(){
@@ -91,7 +146,6 @@ public abstract class BaseCharacterCard {
         this.hp = hp;
     }
     public void setBaseAttack(int baseAttack) {
-        if (baseAttack < 0) baseAttack = 0;
         this.baseAttack = baseAttack;
     }
     public WeaponType getWeaponType(){
@@ -120,4 +174,6 @@ public abstract class BaseCharacterCard {
     public boolean isFull() {
         return full;
     }
+
+    public abstract Image getImage();
 }

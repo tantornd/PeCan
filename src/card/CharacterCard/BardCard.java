@@ -3,6 +3,7 @@ package card.CharacterCard;
 import game.Buff;
 import game.GameLogic;
 import game.WeaponType;
+import javafx.scene.image.Image;
 
 public class BardCard extends BaseCharacterCard {
     public BardCard() {
@@ -29,5 +30,10 @@ public class BardCard extends BaseCharacterCard {
             game.getBuff().set(game.getCurrentPlayer(), new Buff(2,2));
             game.nextPlayerTurn();
         }
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("bardCard.png").toString());
     }
 }

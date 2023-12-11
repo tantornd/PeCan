@@ -1,9 +1,8 @@
 package gameScene;
 
 import app.Main;
-import card.CharacterCard.AssassinCard;
-import card.CharacterCard.BardCard;
-import card.CharacterCard.BaseCharacterCard;
+import card.CharacterCard.*;
+import game.GameLogic;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -61,8 +60,32 @@ public class CharSelect extends VBox {
         nextBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+
                 if (selectedCharCards.size() == 3) {
                     //go to battle scene
+                    try {
+                        Main.switchToGameBattle();
+                    } catch (Exception e) {
+
+                    }
+                    for (VBox vb:selectedCharCards){
+                        if (assasinBox.equals(vb)) {
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new AssassinCard());
+                        } else if (bardBox.equals(vb)) {
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new BardCard());
+                        } else if (flameArcherBox.equals(vb)) {
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new FlameArcherCard());
+                        } else if (knightBox.equals(vb)) {
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new KnightCard());
+                        } else if (mageBox.equals(vb)) {
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new MageCard());
+                        } else if (palladinBox.equals(vb)) {
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new PalladinCard());
+                        } else if (priestBox.equals(vb)) {
+                            GameLogic.getInstance().getCharacterCards().get(0).add(new PriestCard());
+                        }
+                    }
+
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please select 3 character cards!!!");

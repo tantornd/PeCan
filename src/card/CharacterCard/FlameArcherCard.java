@@ -4,6 +4,7 @@ import game.Buff;
 import game.CarryOnDamage;
 import game.GameLogic;
 import game.WeaponType;
+import javafx.scene.image.Image;
 
 public class FlameArcherCard extends BaseCharacterCard{
     public FlameArcherCard() {
@@ -34,5 +35,9 @@ public class FlameArcherCard extends BaseCharacterCard{
             game.getCarryOnDamage().set(game.getCurrentPlayer(), new CarryOnDamage(2, 1, true));
             game.nextPlayerTurn();
         }
+    }
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("flameArcherCard.png").toString());
     }
 }

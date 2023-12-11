@@ -2,6 +2,7 @@ package card.CharacterCard;
 
 import game.GameLogic;
 import game.WeaponType;
+import javafx.scene.image.Image;
 
 public class KnightCard extends BaseCharacterCard {
     public KnightCard() {
@@ -28,5 +29,9 @@ public class KnightCard extends BaseCharacterCard {
             game.getActiveChara(game.getOpponentChar()).takeDamage(baseAttack + 4);
             game.nextPlayerTurn();
         }
+    }
+    @Override
+    public Image getImage() {
+        return new Image(ClassLoader.getSystemResource("knightCard.png").toString());
     }
 }
