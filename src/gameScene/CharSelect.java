@@ -1,5 +1,6 @@
 package gameScene;
 
+import app.Main;
 import card.CharacterCard.AssassinCard;
 import card.CharacterCard.BardCard;
 import card.CharacterCard.BaseCharacterCard;
@@ -17,9 +18,10 @@ import javafx.scene.paint.ImagePattern;
 
 import java.util.ArrayList;
 
-public class CharSelect extends StackPane {
+public class CharSelect extends VBox {
+
     private ArrayList<VBox> selectedCharCards;
-    private HBox selectableChar, selectedChar;
+    private HBox selectableChar, selectedChar, btnBar;
     private VBox assasinBox, bardBox, flameArcherBox, knightBox, mageBox, palladinBox, priestBox;
 
 
@@ -27,12 +29,12 @@ public class CharSelect extends StackPane {
         selectedCharCards = new ArrayList<>();
         setPrefWidth(1440);
         setPrefHeight(900);
-        setAlignment(Pos.CENTER);
+        setSpacing(50);
+
         Image textImg = new Image(ClassLoader.getSystemResource("charSelect.png").toString());
         ImageView text = new ImageView(textImg);
         getChildren().add(text);
 
-        setAlignment(text, Pos.TOP_CENTER);
         Image bg = new Image(ClassLoader.getSystemResource("charSelectBG.png").toString());
         setBackground(new Background(new BackgroundFill(new ImagePattern(bg), CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -43,13 +45,12 @@ public class CharSelect extends StackPane {
         selectedChar = new HBox();
         selectedChar.setSpacing(50);
         selectedChar.setPrefHeight(240);
-
+        selectedChar.setPrefWidth(1440);
         getChildren().add(selectedChar);
 
-        setAlignment(Pos.CENTER);
 
-        HBox buttonBar = new HBox();
-        buttonBar.setSpacing(50);
+        btnBar = new HBox();
+        btnBar.setPrefWidth(1440);
 
         Button nextBtn = new Button("Next");
         nextBtn.setPrefHeight(100);
@@ -72,11 +73,7 @@ public class CharSelect extends StackPane {
         resetBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                selectedCharCards.clear();
-                selectedChar = new HBox();
-                selectedChar.setSpacing(50);
-                selectedChar.setPrefHeight(240);
-
+                Main.charSelect = new CharSelect();
             }
         });
 
@@ -99,38 +96,40 @@ public class CharSelect extends StackPane {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "characters info");
             }
         });
-        buttonBar.getChildren().add(nextBtn);
-        buttonBar.getChildren().add(resetBtn);
-        buttonBar.getChildren().add(returnBtn);
-        buttonBar.getChildren().add(infoBtn);
-        getChildren().add(buttonBar);
-        setAlignment(buttonBar, Pos.BOTTOM_CENTER);
+        btnBar.getChildren().add(infoBtn);
+        btnBar.getChildren().add(returnBtn);
+        btnBar.getChildren().add(resetBtn);
+        btnBar.getChildren().add(nextBtn);
 
+        getChildren().add(btnBar);
+
+        setAlignment(Pos.CENTER);
     }
     private void addSelectableChar(){
         selectableChar = new HBox();
         selectableChar.setPrefHeight(240);
+        selectableChar.setPrefWidth(1440);
         selectableChar.setSpacing(50);
         //1
-        ImageView assasin = new ImageView(new Image(ClassLoader.getSystemResource("sampleCard.png").toString()));
+        ImageView assasin = new ImageView(new Image(ClassLoader.getSystemResource("assasinCard.png").toString()));
         assasinBox = new VBox(assasin);
         //2
-        ImageView bard = new ImageView(new Image(ClassLoader.getSystemResource("sampleCard.png").toString()));
+        ImageView bard = new ImageView(new Image(ClassLoader.getSystemResource("bardCard.png").toString()));
         bardBox = new VBox(bard);
         //3
-        ImageView flameArcher = new ImageView(new Image(ClassLoader.getSystemResource("sampleCard.png").toString()));
+        ImageView flameArcher = new ImageView(new Image(ClassLoader.getSystemResource("flameArcherCard.png").toString()));
         flameArcherBox = new VBox(flameArcher);
         //4
-        ImageView knight = new ImageView(new Image(ClassLoader.getSystemResource("sampleCard.png").toString()));
+        ImageView knight = new ImageView(new Image(ClassLoader.getSystemResource("knightCard.png").toString()));
         knightBox = new VBox(knight);
         //5
-        ImageView mage = new ImageView(new Image(ClassLoader.getSystemResource("sampleCard.png").toString()));
+        ImageView mage = new ImageView(new Image(ClassLoader.getSystemResource("mageCard.png").toString()));
         mageBox = new VBox(mage);
         //6
-        ImageView palladin = new ImageView(new Image(ClassLoader.getSystemResource("sampleCard.png").toString()));
+        ImageView palladin = new ImageView(new Image(ClassLoader.getSystemResource("palladinCard.png").toString()));
         palladinBox = new VBox(palladin);
         //7
-        ImageView priest = new ImageView(new Image(ClassLoader.getSystemResource("sampleCard.png").toString()));
+        ImageView priest = new ImageView(new Image(ClassLoader.getSystemResource("priestCard.png").toString()));
         priestBox = new VBox(priest);
 
         selectableChar.getChildren().addAll(assasinBox, bardBox, flameArcherBox, knightBox, mageBox, palladinBox, priestBox);
@@ -184,17 +183,19 @@ public class CharSelect extends StackPane {
     }
     private void addSelectedChar(VBox charCard) {
         boolean addBox = true;
-        for (int i = 0; i<3; i++) {
+        for (int i = 0; i<selectedCharCards.size(); i++) {
             if (selectedCharCards.get(i).equals(charCard)) {
                 Alert a = new Alert(Alert.AlertType.ERROR, "can not select the same character card");
                 a.show();
                 addBox = false;
+                break;
             }
-        }
-        if (selectedCharCards.size() > 3){
-            addBox = false;
-            Alert a = new Alert(Alert.AlertType.ERROR, "can not select more than 3 character cards");
-            a.show();
+            if (i > 2) {
+                addBox = false;
+                Alert a = new Alert(Alert.AlertType.ERROR, "can not select more than 3 character cards");
+                a.show();
+                break;
+            }
         }
         if (addBox) {
             selectedCharCards.add(charCard);
