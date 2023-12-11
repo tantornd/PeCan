@@ -46,7 +46,7 @@ public class Main extends Application{
         ImageView imageView = new ImageView(new Image(ClassLoader.getSystemResource("GameStart.png").toString()));
         StackPane stp = new StackPane(imageView);
         stage.setScene(new Scene(stp));
-        Thread.sleep(500);
+        Thread.sleep(1000);
         Battle battle = new Battle();
         stage.setScene(new Scene(battle));
 

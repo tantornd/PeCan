@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -55,8 +56,9 @@ public class Battle extends BorderPane {
         middle.getChildren().add(playerSupport);
         middle.getChildren().add(characterPane);
 
-        VBox left = new VBox();
-        HBox leftBottomPane = new HBox();
+
+        VBox right = new VBox();
+        HBox rightBottomPane = new HBox();
 
         Button atkBtn = new Button("ATK");
         atkBtn.setPrefHeight(150);
@@ -65,6 +67,9 @@ public class Battle extends BorderPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
             // TODO active chara
+                if (GameLogic.getInstance().canAttack(0)) {
+                    GameLogic.getInstance().getActiveChara(GameLogic.getInstance().getCharacterCards().get(0)).attack();
+                }
             }
         });
 
@@ -75,6 +80,9 @@ public class Battle extends BorderPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 // TODO active chara
+                if (GameLogic.getInstance().canUseSkill(0)) {
+                    GameLogic.getInstance().getActiveChara(GameLogic.getInstance().getCharacterCards().get(0)).useSkill();
+                }
             }
         });
 
@@ -85,15 +93,46 @@ public class Battle extends BorderPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 // TODO active chara
+                if (GameLogic.getInstance().canUseUltimate(0)) {
+                    GameLogic.getInstance().getActiveChara(GameLogic.getInstance().getCharacterCards().get(0)).useUltimate();
+                }
             }
         });
 
         Text dice = new Text();
-        leftBottomPane.getChildren().add(atkBtn);
-        leftBottomPane.getChildren().add(skillBtn);
-        leftBottomPane.getChildren().add(ultiBtn);
-        leftBottomPane.getChildren().add(dice);
-        left.getChildren().add(leftBottomPane);
+        dice.setText(Integer.toString(GameLogic.getInstance().getDice().get(0)));
+
+        rightBottomPane.getChildren().add(atkBtn);
+        rightBottomPane.getChildren().add(skillBtn);
+        rightBottomPane.getChildren().add(ultiBtn);
+        rightBottomPane.getChildren().add(dice);
+        right.getChildren().add(rightBottomPane);
+
+
+        VBox left = new VBox();
+        left.setPrefWidth(360);
+        supportPane = new SupportPane();
+
+        Button info = new Button();
+        info.setPrefWidth(150);
+        info.setPrefHeight(100);
+        info.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Alert a = new Alert(Alert.AlertType.INFORMATION, "There are 3 types of support card.\n"+"1. Weapon Card (increases your characters damage)\n" +
+                        "2. Food Card (heals your character or gives your character shield)\n" +
+                        "3. Event Card (takes effect at the start of every round, for a set amount of rounds)");
+            }
+        });
+        left.setSpacing(200);
+        left.getChildren().add(info);
+
+
+        getChildren().addAll(middle, right, left);
+        setAlignment(middle, Pos.CENTER);
+        setAlignment(right, Pos.BOTTOM_RIGHT);
+        setAlignment(left, Pos.BOTTOM_LEFT );
+
 
     }
 
