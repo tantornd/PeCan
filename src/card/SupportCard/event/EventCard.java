@@ -19,7 +19,9 @@ public abstract class EventCard extends BaseSupportCard {
     public void play() {
         GameLogic game = GameLogic.getInstance();
         game.setEventCards(this);
-        performEffect();
+
+        //TODO: ADD JAVA FX FOR SETTING EVENT CARD IN SUPPORT SKILL ZONE
+
     }
     @Override
     public boolean isPlayable() {
