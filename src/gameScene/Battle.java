@@ -33,7 +33,8 @@ public class Battle extends GridPane {
             }
             playerChara.getChildren().add(hb);
         }
-        
+
+
     }
 
 }

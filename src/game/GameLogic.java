@@ -166,7 +166,7 @@ public class GameLogic {
                 if (!eventCards.get(i).isEmpty()){//GIVE CHARACTER EVENT CARD EFFECTS
                     for (EventCard e: eventCards.get(i)){
                         if (e == null) continue;
-                        e.performEffect();
+                        e.performEffect(i);
                         e.decrementRounds();
                         if (e.getRounds() <= 0) e = null;
                     }
