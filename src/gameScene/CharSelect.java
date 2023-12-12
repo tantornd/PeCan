@@ -57,7 +57,7 @@ public class CharSelect extends VBox {
         Button nextBtn = new Button("Next");
         nextBtn.setPrefHeight(100);
         nextBtn.setPrefWidth(150);
-        nextBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         nextBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 

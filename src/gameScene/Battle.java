@@ -126,11 +126,13 @@ public class Battle extends BorderPane {
         });
         left.setSpacing(200);
         left.getChildren().add(info);
-        getChildren().addAll(middle, right, left);
-        setAlignment(middle, Pos.BOTTOM_CENTER);
-        setAlignment(right, Pos.BOTTOM_RIGHT);
-        setAlignment(left, Pos.BOTTOM_LEFT);
-
+        //getChildren().addAll(middle, right, left);
+        //setAlignment(middle, Pos.BOTTOM_CENTER);
+        //setAlignment(right, Pos.BOTTOM_RIGHT);
+        //setAlignment(left, Pos.BOTTOM_LEFT);
+        setCenter(middle);
+        setRight(right);
+        setLeft(left);
         /*Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
