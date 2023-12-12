@@ -399,5 +399,8 @@ public class GameLogic {
     public ArrayList<ArrayList<EventCard>> getEventCards() {
         return eventCards;
     }
+    public boolean isGameEnd() {
+        return gameEnd;
+    }
 
 }

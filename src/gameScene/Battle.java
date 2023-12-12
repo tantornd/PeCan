@@ -126,12 +126,23 @@ public class Battle extends BorderPane {
         });
         left.setSpacing(200);
         left.getChildren().add(info);
-
-
         getChildren().addAll(middle, right, left);
-        setAlignment(middle, Pos.CENTER);
+        setAlignment(middle, Pos.BOTTOM_CENTER);
         setAlignment(right, Pos.BOTTOM_RIGHT);
-        setAlignment(left, Pos.BOTTOM_LEFT );
+        setAlignment(left, Pos.BOTTOM_LEFT);
+
+        /*Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!GameLogic.getInstance().isGameEnd())
+                getChildren().addAll(middle, right, left);
+                setAlignment(middle, Pos.BOTTOM_CENTER);
+                setAlignment(right, Pos.BOTTOM_RIGHT);
+                setAlignment(left, Pos.BOTTOM_LEFT);
+            }
+        });
+        t.start();*/
+
 
 
     }
