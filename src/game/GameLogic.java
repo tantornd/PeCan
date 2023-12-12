@@ -241,7 +241,7 @@ public class GameLogic {
         ArrayList<BaseCharacterCard> player = characterCards.get(idx);
         BaseCharacterCard activeChara = getActiveChara(player);
         return activeChara.canAttack();
-    }canAttack
+    }
     public boolean canUseSkill(int idx){
         ArrayList<BaseCharacterCard> player = characterCards.get(idx);
         BaseCharacterCard activeChara = getActiveChara(player);
