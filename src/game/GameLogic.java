@@ -158,6 +158,12 @@ public class GameLogic {
             draw(0, 1);
             draw(1, 1);
             resetDice();
+            if (!characterCards.get(0).isEmpty()){
+                characterCards.get(0).get(0).setActive(true);
+            }
+            if (!characterCards.get(1).isEmpty()){
+                characterCards.get(1).get(0).setActive(true);
+            }
             for(int i = 0; i < 2; i++){
                 if (buff.get(i) != null){ //GIVE CHARACTER BARD BUFFS
                     for (BaseCharacterCard e: characterCards.get(i)){
@@ -235,7 +241,7 @@ public class GameLogic {
         ArrayList<BaseCharacterCard> player = characterCards.get(idx);
         BaseCharacterCard activeChara = getActiveChara(player);
         return activeChara.canAttack();
-    }
+    }canAttack
     public boolean canUseSkill(int idx){
         ArrayList<BaseCharacterCard> player = characterCards.get(idx);
         BaseCharacterCard activeChara = getActiveChara(player);

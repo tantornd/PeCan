@@ -1,0 +1,390 @@
+@startuml
+class card.SupportCard.food.GetAllFood {
++ {static} ArrayList<BaseSupportCard> getAll()
+}
+class card.SupportCard.food.shielding.BobaTea {
++ <<Create>> BobaTea()
++ Image getImage()
+}
+class audio.Audio {
+}
+class card.SupportCard.food.healing.Salad {
++ <<Create>> Salad()
++ Image getImage()
+}
+class gameScene.CharSelect {
+- ArrayList<VBox> selectedCharCards
+- HBox selectableChar
+- HBox selectedChar
+- VBox assasinBox
++ <<Create>> CharSelect()
+- void addSelectableChar()
+- void addOnMouseClicked()
+- void addSelectedChar(VBox)
+}
+abstract class card.SupportCard.food.healing.HealingFood {
+- int amount
++ <<Create>> HealingFood(int,int)
++ void play()
++ int getAmount()
++ void setAmount(int)
++ {abstract}Image getImage()
+}
+class gameScene.MainMenu {
+- {static} ImageView titleText
++ <<Create>> MainMenu()
+}
+class card.SupportCard.event.Devour {
++ <<Create>> Devour()
++ void performEffect(int)
++ Image getImage()
+}
+class app.Main {
++ {static} Stage stage
++ {static} MainMenu mainMenu
++ {static} CharSelect charSelect
++ {static} Scene mainMenuScene
++ void start(Stage)
++ {static} void switchToCharSelect()
++ {static} void switchToMainMenu()
++ {static} void switchToGameBattle()
++ {static} void main(String[])
+}
+class card.CharacterCard.PalladinCard {
++ <<Create>> PalladinCard()
++ void useSkill()
++ void useUltimate()
++ Image getImage()
+}
+class card.CharacterCard.BardCard {
++ <<Create>> BardCard()
++ void useSkill()
++ void useUltimate()
++ Image getImage()
+}
+class util.Randomizer {
++ {static} T getRandomElement(ArrayList<T>)
+}
+class card.SupportCard.event.Weaken {
++ <<Create>> Weaken()
++ void performEffect(int)
++ Image getImage()
+}
+abstract class card.CharacterCard.BaseCharacterCard {
++ WeaponType weaponType
++ int energy
++ int shield
++ int hp
++ int baseAttack
++ boolean active
++ <<Create>> BaseCharacterCard(WeaponType,int)
++ void setActive(boolean)
++ void switchActive()
++ void takeDamage(int)
++ boolean canAttack()
++ boolean canUseSkill()
++ boolean canUseUltimate()
++ void attack()
++ {abstract}void useSkill()
++ {abstract}void useUltimate()
++ boolean isAlive()
++ void setWeaponType(WeaponType)
++ void setEnergy(int)
++ void setShield(int)
++ void setHp(int)
++ void setBaseAttack(int)
++ WeaponType getWeaponType()
++ int getHp()
++ int getEnergy()
++ int getBaseAttack()
++ int getShield()
++ boolean getActive()
++ {abstract}Image getImage()
+}
+enum game.WeaponType {
++  BOW
++  SWORD
++  GRIMOIRE
++ String toString()
+}
+class card.SupportCard.food.shielding.BananaShake {
++ <<Create>> BananaShake()
++ Image getImage()
+}
+class card.SupportCard.food.healing.Pizza {
++ <<Create>> Pizza()
++ Image getImage()
+}
+class card.SupportCard.food.healing.Spaghetti {
++ <<Create>> Spaghetti()
++ Image getImage()
+}
+class game.CarryOnDamage {
+- int rounds
+- int damage
+- boolean attackAll
++ <<Create>> CarryOnDamage(int,int,boolean)
++ void decrementRounds()
++ void setDamage(int)
++ void setRounds(int)
++ void setAttackAll(boolean)
++ int getDamage()
++ int getRounds()
++ boolean getAttackAll()
+}
+class card.SupportCard.event.AfterShock {
++ <<Create>> AfterShock()
++ void performEffect(int)
++ Image getImage()
+}
+class game.Buff {
+- int rounds
+- int amount
++ <<Create>> Buff(int,int)
++ void decrementRounds()
++ int getRounds()
++ int getAmount()
++ void setRounds(int)
++ void setAmount(int)
+}
+class card.CharacterCard.MageCard {
++ <<Create>> MageCard()
++ void useSkill()
++ void useUltimate()
++ Image getImage()
+}
+class card.CharacterCard.FlameArcherCard {
++ <<Create>> FlameArcherCard()
++ void useSkill()
++ void useUltimate()
++ Image getImage()
+}
+class card.SupportCard.weapons.SwordCard {
++ <<Create>> SwordCard()
++ void play()
++ boolean isPlayable()
++ Image getImage()
+}
+class card.CharacterCard.GetCharacterType {
++ {static} ArrayList<BaseCharacterCard> getDmgType()
++ {static} ArrayList<BaseCharacterCard> getSupportType()
+}
+class game.Bot {
+- boolean playedEvent
++ {static} void performAction()
+}
+class card.SupportCard.event.StimBeacon {
++ <<Create>> StimBeacon()
++ void performEffect(int)
++ Image getImage()
+}
+class gameScene.SupportPane {
+- {static} Thread playerEventT
++ <<Create>> SupportPane()
++ {static} Thread getPlayerEventT()
+}
+abstract class card.SupportCard.event.EventCard {
+- int rounds
++ <<Create>> EventCard(int,int)
++ {abstract}void performEffect(int)
++ void decrementRounds()
++ void play()
++ boolean isPlayable()
++ void setRounds(int)
++ int getRounds()
++ {abstract}Image getImage()
+}
+class card.SupportCard.event.DivineGrace {
++ <<Create>> DivineGrace()
++ void performEffect(int)
++ Image getImage()
+}
+class card.SupportCard.food.healing.MieangPlaPao {
++ <<Create>> MieangPlaPao()
++ Image getImage()
+}
+class card.SupportCard.food.shielding.CrabCakes {
++ <<Create>> CrabCakes()
++ Image getImage()
+}
+class card.SupportCard.weapons.BowCard {
++ <<Create>> BowCard()
++ void play()
++ boolean isPlayable()
++ Image getImage()
+}
+class card.SupportCard.weapons.GrimoireCard {
++ <<Create>> GrimoireCard()
++ void play()
++ boolean isPlayable()
++ Image getImage()
+}
+class card.CharacterCard.PriestCard {
++ <<Create>> PriestCard()
++ void useSkill()
++ void useUltimate()
++ Image getImage()
+}
+abstract class card.SupportCard.weapons.WeaponCard {
++ <<Create>> WeaponCard()
++ {abstract}void play()
++ {abstract}boolean isPlayable()
++ {abstract}Image getImage()
+}
+class card.SupportCard.food.shielding.SpringRolls {
++ <<Create>> SpringRolls()
++ Image getImage()
+}
+class game.GameLogic {
+- ArrayList<BaseSupportCard> deck
+- ArrayList<ArrayList<BaseSupportCard>> playerHands
+- ArrayList<ArrayList<BaseCharacterCard>> characterCards
+- ArrayList<Integer> dice
+- ArrayList<CarryOnDamage> carryOnDamage
+- ArrayList<Buff> buff
+- ArrayList<ArrayList<EventCard>> eventCards
+- int currentPlayer
+- {static} GameLogic instance
+- {static} boolean gameEnd
+- {static} boolean win
+- boolean botPlayedEvent
+- <<Create>> GameLogic()
++ {static} GameLogic getInstance()
++ {static} void clearInstance()
++ void initGame()
++ void endGame()
++ void initRound()
++ void endRound()
++ void nextPlayerTurn()
++ ArrayList<BaseCharacterCard> getOpponentChar()
++ boolean canAttack(int)
++ boolean canUseSkill(int)
++ boolean canUseUltimate(int)
++ boolean isHandPlayable(int)
++ void newEnemyCharacters()
++ ArrayList<BaseSupportCard> draw(int,int)
++ void resetDice()
++ BaseCharacterCard getActiveChara(ArrayList<BaseCharacterCard>)
++ BaseCharacterCard getActiveCharaOpponent(int)
++ void useDice(int)
++ void takeCarryOnDamage()
++ ArrayList<ArrayList<BaseCharacterCard>> getCharacterCards()
++ ArrayList<ArrayList<BaseSupportCard>> getPlayerHands()
++ ArrayList<BaseSupportCard> getDeck()
++ ArrayList<CarryOnDamage> getCarryOnDamage()
++ ArrayList<Integer> getDice()
++ int getCurrentPlayer()
++ void setCarryOnDamage(ArrayList<CarryOnDamage>)
++ void setCharacterCards(ArrayList<ArrayList<BaseCharacterCard>>)
++ void setCurrentPlayer(int)
++ void setDice(int,int)
++ {static} void setGameEnd(boolean)
++ ArrayList<Buff> getBuff()
++ void setEventCards(EventCard)
++ void setBotPlayedEvent(boolean)
++ boolean isBotPlayedEvent()
++ ArrayList<ArrayList<EventCard>> getEventCards()
++ boolean isGameEnd()
+}
+class card.SupportCard.event.PerfectBarrier {
++ <<Create>> PerfectBarrier()
++ void performEffect(int)
++ Image getImage()
+}
+class card.SupportCard.event.GetAllEvent {
++ {static} ArrayList<EventCard> getAll()
+}
+class gameScene.Battle {
++ CharacterPane characterPane
++ SupportPane supportPane
++ {static} Thread supportT
++ <<Create>> Battle()
++ {static} Thread getSupportT()
+}
+class card.CharacterCard.KnightCard {
++ <<Create>> KnightCard()
++ void useSkill()
++ void useUltimate()
++ Image getImage()
+}
+class gameScene.CharacterPane {
+- HBox playerChara
++ {static} Thread characterT
++ <<Create>> CharacterPane()
++ {static} Thread getThread()
+}
+abstract class card.SupportCard.food.FoodCard {
++ <<Create>> FoodCard(int)
++ {abstract}void play()
++ boolean isPlayable()
++ {abstract}Image getImage()
+}
+abstract class card.SupportCard.food.shielding.ShieldingFood {
+- int amount
++ <<Create>> ShieldingFood(int,int)
++ void play()
++ int getAmount()
++ void setAmount(int)
++ {abstract}Image getImage()
+}
+abstract class card.SupportCard.BaseSupportCard {
+- int cost
++ <<Create>> BaseSupportCard(int)
++ void setCost(int)
++ int getCost()
++ {abstract}void play()
++ {abstract}boolean isPlayable()
++ {abstract}Image getImage()
+}
+class card.CharacterCard.AssassinCard {
++ <<Create>> AssassinCard()
++ void useSkill()
++ void useUltimate()
++ Image getImage()
+}
+class card.SupportCard.event.DoubleDraw {
++ <<Create>> DoubleDraw()
++ void performEffect(int)
++ Image getImage()
+}
+
+
+card.SupportCard.food.shielding.ShieldingFood <|-- card.SupportCard.food.shielding.BobaTea
+card.SupportCard.food.healing.HealingFood <|-- card.SupportCard.food.healing.Salad
+gameScene.VBox <|-- gameScene.CharSelect
+card.SupportCard.food.FoodCard <|-- card.SupportCard.food.healing.HealingFood
+javafx.scene.layout.StackPane <|-- gameScene.MainMenu
+card.SupportCard.event.EventCard <|-- card.SupportCard.event.Devour
+javafx.application.Application <|-- app.Main
+card.CharacterCard.BaseCharacterCard <|-- card.CharacterCard.PalladinCard
+card.CharacterCard.BaseCharacterCard <|-- card.CharacterCard.BardCard
+card.SupportCard.event.EventCard <|-- card.SupportCard.event.Weaken
+card.CharacterCard.StackPane <|-- card.CharacterCard.BaseCharacterCard
+card.SupportCard.food.shielding.ShieldingFood <|-- card.SupportCard.food.shielding.BananaShake
+card.SupportCard.food.healing.HealingFood <|-- card.SupportCard.food.healing.Pizza
+card.SupportCard.food.healing.HealingFood <|-- card.SupportCard.food.healing.Spaghetti
+card.SupportCard.event.EventCard <|-- card.SupportCard.event.AfterShock
+card.CharacterCard.BaseCharacterCard <|-- card.CharacterCard.MageCard
+card.CharacterCard.BaseCharacterCard <|-- card.CharacterCard.FlameArcherCard
+card.SupportCard.weapons.WeaponCard <|-- card.SupportCard.weapons.SwordCard
+card.SupportCard.event.EventCard <|-- card.SupportCard.event.StimBeacon
+javafx.scene.layout.GridPane <|-- gameScene.SupportPane
+card.SupportCard.BaseSupportCard <|-- card.SupportCard.event.EventCard
+card.SupportCard.event.EventCard <|-- card.SupportCard.event.DivineGrace
+card.SupportCard.food.healing.HealingFood <|-- card.SupportCard.food.healing.MieangPlaPao
+card.SupportCard.food.shielding.ShieldingFood <|-- card.SupportCard.food.shielding.CrabCakes
+card.SupportCard.weapons.WeaponCard <|-- card.SupportCard.weapons.BowCard
+card.SupportCard.weapons.WeaponCard <|-- card.SupportCard.weapons.GrimoireCard
+card.CharacterCard.BaseCharacterCard <|-- card.CharacterCard.PriestCard
+card.SupportCard.BaseSupportCard <|-- card.SupportCard.weapons.WeaponCard
+card.SupportCard.food.shielding.ShieldingFood <|-- card.SupportCard.food.shielding.SpringRolls
+card.SupportCard.event.EventCard <|-- card.SupportCard.event.PerfectBarrier
+gameScene.BorderPane <|-- gameScene.Battle
+card.CharacterCard.BaseCharacterCard <|-- card.CharacterCard.KnightCard
+javafx.scene.layout.VBox <|-- gameScene.CharacterPane
+card.SupportCard.BaseSupportCard <|-- card.SupportCard.food.FoodCard
+card.SupportCard.food.FoodCard <|-- card.SupportCard.food.shielding.ShieldingFood
+javafx.scene.layout.StackPane <|-- card.SupportCard.BaseSupportCard
+card.CharacterCard.BaseCharacterCard <|-- card.CharacterCard.AssassinCard
+card.SupportCard.event.EventCard <|-- card.SupportCard.event.DoubleDraw
+@enduml
