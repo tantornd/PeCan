@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PeCan:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PeCan_jar</output-path>
+    <root id="archive" name="PeCan.jar">
+      <element id="module-output" name="PeCan" />
+      <element id="extracted-dir" path="$JavaFX$/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$JavaFX$/javafx.web.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$JavaFX$/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$JavaFX$/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$JavaFX$/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$JavaFX$/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$JavaFX$/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$JavaFX$/javafx.graphics.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

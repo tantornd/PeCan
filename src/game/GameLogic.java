@@ -295,6 +295,8 @@ public class GameLogic {
         for (BaseCharacterCard e: characterCards){
             if (e.getActive()) return e;
         }
+        gameEnd = true;
+        endGame();
         return null;
     }
     public BaseCharacterCard getActiveCharaOpponent(int player){
